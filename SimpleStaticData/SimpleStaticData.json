@@ -1,0 +1,180 @@
+{
+ "api": [
+  {
+   "elems": [
+    {
+     "attKind": "standard",
+     "body": "--attKind:standard\nself._A = pixcCommon.execAttribute(0, self._A, val, doSet, true )\nself.OneStaticData.ForAction1()",
+     "kind": "func",
+     "name": "Static1",
+     "params": [
+      {
+       "name": "val",
+       "type": ""
+      }
+     ]
+    },
+    {
+     "attKind": "standard",
+     "body": "-- attKind: standard\n-- slotStyle: leftNone;rightNon\nself.resA = pixcCommon.execAttribute(0, self.resA, self._A, doset)",
+     "kind": "func",
+     "name": "ForAction1",
+     "slotStyle": "leftNone;rightNon"
+    },
+    {
+     "attKind": "standard",
+     "body": "--attKind:standard\nself._B = pixcCommon.execAttribute(0, self._B, val, doSet, true )\nself.OneStaticData.ForAction2()",
+     "kind": "func",
+     "name": "Static2",
+     "params": [
+      {
+       "name": "val",
+       "type": ""
+      }
+     ]
+    },
+    {
+     "attKind": "standard",
+     "body": "-- attKind: standard\n-- slotStyle: leftNone;rightNon\nself.resB = pixcCommon.execAttribute(0, self.resB, self._B, doset)",
+     "kind": "func",
+     "name": "ForAction2",
+     "slotStyle": "leftNone;rightNon"
+    }
+   ],
+   "kind": "ns",
+   "name": "OneStaticData"
+  },
+  {
+   "elems": [
+    {
+     "attKind": "standard",
+     "body": "-- attKind: standard\n-- slotStyle:leftIn;rightNone;triggerHidden\nself._F = pixcCommon.execAttribute(0, self._F, val, doSet, true )",
+     "kind": "func",
+     "name": "StaticA",
+     "params": [
+      {
+       "name": "val",
+       "type": ""
+      }
+     ],
+     "slotStyle": "leftIn;rightNone;triggerHidden"
+    },
+    {
+     "attKind": "standard",
+     "body": "-- attKind: standard\n-- slotStyle:leftIn;rightNone;triggerHidden\nself._G = pixcCommon.execAttribute(0, self._G, val, doSet, true )\nself.TwoStaticData.StaticAandStaticB()",
+     "kind": "func",
+     "name": "StaticB",
+     "params": [
+      {
+       "name": "val",
+       "type": ""
+      }
+     ],
+     "slotStyle": "leftIn;rightNone;triggerHidden"
+    },
+    {
+     "body": "-- slotStyle:leftNone;rightOut\npixc.callRefs(self._F, self._G)",
+     "kind": "func",
+     "name": "StaticAandStaticB",
+     "slotStyle": "leftNone;rightOut"
+    }
+   ],
+   "kind": "ns",
+   "name": "TwoStaticData"
+  },
+  {
+   "elems": [
+    {
+     "attKind": "standard",
+     "body": "-- attKind: standard\n-- slotStyle:leftIn;rightNone;triggerHidden\nself._H = pixcCommon.execAttribute(0, self._H, val, doSet, true )\n",
+     "kind": "func",
+     "name": "StaticA",
+     "params": [
+      {
+       "name": "val",
+       "type": ""
+      }
+     ],
+     "slotStyle": "leftIn;rightNone;triggerHidden"
+    },
+    {
+     "attKind": "standard",
+     "body": "-- attKind: standard\n-- slotStyle:leftIn;rightNone;triggerHidden\nself._I = pixcCommon.execAttribute(0, self._I, val, doSet, true )\n",
+     "kind": "func",
+     "name": "StaticB",
+     "params": [
+      {
+       "name": "val",
+       "type": ""
+      }
+     ],
+     "slotStyle": "leftIn;rightNone;triggerHidden"
+    },
+    {
+     "attKind": "standard",
+     "body": "-- attKind: standard\n-- slotStyle:leftIn;rightNone;triggerHidden\nself._J = pixcCommon.execAttribute(0, self._J, val, doSet, true )",
+     "kind": "func",
+     "name": "StaticC",
+     "params": [
+      {
+       "name": "val",
+       "type": ""
+      }
+     ],
+     "slotStyle": "leftIn;rightNone;triggerHidden"
+    },
+    {
+     "body": "-- slotStyle:leftNone;rightOut\npixc.callRefs(self._H, self._I, self._J)",
+     "kind": "func",
+     "name": "StaticAandStaticBandStaticC",
+     "slotStyle": "leftNone;rightOut"
+    }
+   ],
+   "kind": "ns",
+   "name": "ThreeStaticData"
+  },
+  {
+   "body": "self.OneStaticData.Static1(0)\r\nUtils.Timer.sleep(5000)\r\nself.OneStaticData.Static2(0)\r\n",
+   "kind": "func",
+   "name": "Static1and2"
+  },
+  {
+   "body": "self.OneStaticData.ForAction1()\r\nUtils.Timer.sleep(5000)\r\nself.OneStaticData.ForAction2()\r\n",
+   "kind": "func",
+   "name": "ForAction1and2"
+  }
+ ],
+ "cjv": {
+  "h": 459.0,
+  "w": 303.0,
+  "x": 46.0,
+  "y": 286.0
+ },
+ "definedExternally": false,
+ "hostInfo": {
+  "systemType": ""
+ },
+ "libraryExportPath": "C:/ProgramData/AV Stumpfl/Pixera/control_library_user/SimpleStaticData.json",
+ "license": "1GNTlyr7sewU1l3S6nhV4rVEIWXVidAk+JxmUT2YZ9KbptvgcvDBAP8970vOFcFFmQxCE7XV3Qf7NgzrTt8y6fd20al+P44gF4Sb3lkPRI8=",
+ "name": "SimpleStaticData",
+ "properties": [
+  {
+   "cont": "true",
+   "name": "UI Is Editable"
+  },
+  {
+   "cont": "",
+   "name": "Auth Source"
+  },
+  {
+   "cont": "",
+   "name": "Permissions"
+  },
+  {
+   "cont": "{\"isInEditMode\":false,\"pages\":[{\"name\":\"Page1\",\"theme\":\"#1c1c1c\",\"components\":[{\"componentId\":\"Component_1626655703377_92401\",\"label\":\"Static1\",\"type\":\"UbControlButton\",\"bgColor\":\"#555555\",\"dims\":{\"x\":10,\"y\":90,\"width\":100,\"height\":30},\"invoc\":[{\"kind\":\"interface\",\"name\":\"SimpleStaticData\"},{\"kind\":\"ns\",\"name\":\"OneStaticData\"},{\"kind\":\"func\",\"name\":\"Static1\",\"params\":[{\"type\":\"undefined\",\"name\":\"val\"}]}],\"style\":\"\",\"styleCache\":\"\",\"styleClasses\":[\"\"],\"data\":{\"linkedAction\":[],\"toggle\":false}},{\"componentId\":\"Component_1626660078591_56142\",\"label\":\"Static2\",\"type\":\"UbControlButton\",\"bgColor\":\"#555555\",\"dims\":{\"x\":10,\"y\":130,\"width\":100,\"height\":30},\"invoc\":[{\"kind\":\"interface\",\"name\":\"SimpleStaticData\"},{\"kind\":\"ns\",\"name\":\"OneStaticData\"},{\"kind\":\"func\",\"name\":\"Static2\",\"params\":[{\"type\":\"undefined\",\"name\":\"val\"}]}],\"style\":\"\",\"styleCache\":\"\",\"styleClasses\":[\"\"],\"data\":{\"linkedAction\":[],\"toggle\":false}},{\"componentId\":\"Component_1626660095218_43918\",\"label\":\"ForAction1\",\"type\":\"UbControlButton\",\"bgColor\":\"#555555\",\"dims\":{\"x\":10,\"y\":170,\"width\":100,\"height\":30},\"invoc\":[{\"kind\":\"interface\",\"name\":\"SimpleStaticData\"},{\"kind\":\"ns\",\"name\":\"OneStaticData\"},{\"kind\":\"func\",\"name\":\"ForAction1\"}],\"style\":\"\",\"styleCache\":\"\",\"styleClasses\":[\"\"],\"data\":{\"linkedAction\":[],\"toggle\":false}},{\"componentId\":\"Component_1626660110216_99212\",\"label\":\"ForAction2\",\"type\":\"UbControlButton\",\"bgColor\":\"#555555\",\"dims\":{\"x\":10,\"y\":210,\"width\":100,\"height\":30},\"invoc\":[{\"kind\":\"interface\",\"name\":\"SimpleStaticData\"},{\"kind\":\"ns\",\"name\":\"OneStaticData\"},{\"kind\":\"func\",\"name\":\"ForAction2\"}],\"style\":\"\",\"styleCache\":\"\",\"styleClasses\":[\"\"],\"data\":{\"linkedAction\":[],\"toggle\":false}}],\"styleClasses\":[\"\"]}],\"settings\":{}}",
+   "name": "uib"
+  }
+ ],
+ "separateCode": false,
+ "uiUrl": "/static/ui_builder/ui_builder.html"
+}
