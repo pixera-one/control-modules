@@ -1,4 +1,4 @@
-Studiocast_vMix
+StudioCoast_vMix
 
 V1.0
 
