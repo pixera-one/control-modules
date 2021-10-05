@@ -1,0 +1,184 @@
+{
+ "api": [
+  {
+   "body": "if self.mouse == nil then\n\tif self.pixcHelper == nil then\n\t\trequire \"pixcHelper\"\n\t\tself.pixcHelper = createPixcHelper(pixc,self())\n\tend\n\n\tlocal path = self.pixcHelper:getProperty(\"Path DLL\")\n\tlocal pathDLL = path .. \"/bmMouse.dll\"\n\tself.mouse = package.loadlib(pathDLL,\"luaopen_bmMouse\")()\n\tlocal res, message = pcall(self.mouse.init)\n\tif res == false then\n\t\tpixc.error(\"could not load DLL\")\n\tend\nend\nself.interval(self._intervalSec)",
+   "kind": "func",
+   "name": "init",
+   "slotStyle": "leftIn;rightOut"
+  },
+  {
+   "body": "if self._interval ~= nil then\n\tpixc.getRoot().Utils.Timer.clearInterval(self._interval);\n\tself._interval = nil\nend\nif self.mouse ~= nil then\n\tself.mouse.uninit()\nend\nself.mouse = nil\n",
+   "kind": "func",
+   "name": "uninit",
+   "slotStyle": "leftIn;rightOut"
+  },
+  {
+   "attKind": "standard",
+   "attReports": {
+    "0": "0.04"
+   },
+   "body": "self._intervalSec = pixcCommon.execAttribute(0.04, self._intervalSec, sec, true)\n\nif self.mouse == nil then\n\treturn\nend\n\nif self._interval ~= nil then\n\tpixc.getRoot().Utils.Timer.clearInterval(self._interval);\n\tself._interval = nil\nend\nself._interval = pixc.getRoot().Utils.Timer.setInterval(\n\tfunction()\n\n\tlocal point = self.mouse.get()\n\tself.x(point[\"x\"])\n\tself.y(point[\"y\"])\n\tself.Left_Button(point[\"btn_left\"])\n\tself.Right_Button(point[\"btn_right\"])\n\tself.Middle_Button(point[\"btn_middle\"])\n\t  end,(self._intervalSec * 1000.0))\n",
+   "kind": "func",
+   "name": "interval",
+   "params": [
+    {
+     "name": "sec",
+     "type": "double"
+    }
+   ],
+   "slotStyle": "leftIn;rightNone"
+  },
+  {
+   "attKind": "internal",
+   "body": "\nself._xIn = pixcCommon.execAttribute(0, self._xIn, value, true)\nreturn self._xIn",
+   "kind": "func",
+   "name": "x",
+   "params": [
+    {
+     "name": "value",
+     "type": "double"
+    }
+   ],
+   "slotStyle": "leftNone;rightOut;triggerHidden"
+  },
+  {
+   "attKind": "internal",
+   "body": "\nself._yIn = pixcCommon.execAttribute(0, self._yIn, value, true)\nreturn self._yIn",
+   "kind": "func",
+   "name": "y",
+   "params": [
+    {
+     "name": "value",
+     "type": "double"
+    }
+   ],
+   "slotStyle": "leftNone;rightOut;triggerHidden"
+  },
+  {
+   "attKind": "internal",
+   "body": "\nself._leftBtn = pixcCommon.execAttribute(0, self._leftBtn, value, true)\nreturn self._leftBtn",
+   "kind": "func",
+   "name": "Left_Button",
+   "params": [
+    {
+     "name": "value",
+     "type": "double"
+    }
+   ],
+   "slotStyle": "leftNone;rightOut;triggerHidden"
+  },
+  {
+   "attKind": "internal",
+   "body": "\nself._middleBtn = pixcCommon.execAttribute(0, self._middleBtn, value, true)\nreturn self._middleBtn",
+   "kind": "func",
+   "name": "Middle_Button",
+   "params": [
+    {
+     "name": "value",
+     "type": "double"
+    }
+   ],
+   "slotStyle": "leftNone;rightOut;triggerHidden"
+  },
+  {
+   "attKind": "internal",
+   "body": "\nself._rightBtn = pixcCommon.execAttribute(0, self._rightBtn, value, true)\nreturn self._rightBtn",
+   "kind": "func",
+   "name": "Right_Button",
+   "params": [
+    {
+     "name": "value",
+     "type": "double"
+    }
+   ],
+   "slotStyle": "leftNone;rightOut;triggerHidden"
+  },
+  {
+   "attKind": "standart",
+   "body": "self._X = pixcCommon.execAttribute(0, self._X, value, true)\n\nif self.mouse == nil then\n\treturn\nend\n\nif self._Y == nil then\n\tself._Y = 0\nend\n\nself.mouse.set(self._X, self._Y)\n",
+   "kind": "func",
+   "name": "set_X",
+   "params": [
+    {
+     "name": "value",
+     "type": "int"
+    }
+   ],
+   "slotStyle": "leftIn;rightNone;triggerHidden"
+  },
+  {
+   "attKind": "standart",
+   "body": "self._Y = pixcCommon.execAttribute(0, self._Y, value, true)\n\nif self.mouse == nil then\n\treturn\nend\n\nif self._X == nil then\n\tself._X = 0\nend\n\nself.mouse.set(self._X, self._Y)\n",
+   "kind": "func",
+   "name": "set_Y",
+   "params": [
+    {
+     "name": "value",
+     "type": "int"
+    }
+   ],
+   "slotStyle": "leftIn;rightNone;triggerHidden"
+  }
+ ],
+ "cjv": {
+  "h": 303.0,
+  "w": 278.0,
+  "x": 198.0,
+  "y": 266.0
+ },
+ "definedExternally": false,
+ "hostInfo": {
+  "systemType": ""
+ },
+ "libraryExportPath": "C:/ProgramData/AV Stumpfl/Pixera/control_library_user/Generic/Generic_Mouse.json",
+ "license": "1GNTlyr7sewU1l3S6nhV4rbXFPjw5j9k5T9FP/CqxvmbbSj4hio6kHl98rXSmMyBu0tCwZp19iDG+RMAFOjj75TGo5VGV2lnSb6meFaQWYHm+IGeND41oYn5oEy6YbLSwSxp20JfjFtR4INJhYZSYg==",
+ "name": "Generic_Mouse",
+ "properties": [
+  {
+   "cont": "true",
+   "name": "Auto Init",
+   "readOnly": true,
+   "typeHint": "bool"
+  },
+  {
+   "cont": "C:\\ProgramData\\AV Stumpfl\\Pixera\\control_library_user\\Generic_Mouse",
+   "name": "Path DLL",
+   "typeHint": "string"
+  },
+  {
+   "cont": "Benni M.",
+   "name": "Creator Name",
+   "readOnly": true,
+   "typeHint": "string"
+  },
+  {
+   "cont": "",
+   "imageBase64": "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",
+   "name": "Logo",
+   "readOnly": true,
+   "showName": false,
+   "typeHint": "image"
+  },
+  {
+   "cont": "www.benni-m.de",
+   "name": "Creator URL",
+   "readOnly": true,
+   "typeHint": "url"
+  },
+  {
+   "cont": "1.0",
+   "name": "Version",
+   "readOnly": true,
+   "typeHint": "string"
+  },
+  {
+   "cont": "24.03.2021",
+   "name": "Date",
+   "readOnly": true,
+   "showName": false,
+   "typeHint": "string"
+  }
+ ],
+ "separateCode": false,
+ "uiUrl": ""
+}
