@@ -2,13 +2,13 @@
 
 ## A
 
-- [ApplyCueGenerator](../modules/ApplyCueGenerator/README.md)
+- [ApplyCueGenerator](../modules/ApplyCueGenerator)
 
 ## C
 
-- [CreatePlayCueTimelineBuilder](../modules/CreatePlayCueTimelineBuilder/README.md)
+- [CreatePlayCueTimelineBuilder](../modules/CreatePlayCueTimelineBuilder)
 
 ## S
 
-- [SimpleStaticData](../modules/SimpleStaticData/README.md)
-- [StudioCoastVMix](../modules/StudioCoastVMix/README.md)
+- [SimpleStaticData](../modules/SimpleStaticData)
+- [StudioCoastVMix](../modules/StudioCoastVMix)
