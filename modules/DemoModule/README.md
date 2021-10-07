@@ -28,6 +28,6 @@ DemoModule is a module for telling people about Pixera Control. The main reason 
 
 ## ⚖ License
 
-[MIT License](https://https://github.com/pixera-one/control-modules/blob/main/LICENSE)
+[MIT License](https://github.com/pixera-one/control-modules/blob/main/LICENSE)
 
 This is a third-party community module, therefor AV Stumpfl will not provide any direct support for this module.
