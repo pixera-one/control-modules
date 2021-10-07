@@ -1,0 +1,24 @@
+{
+  "api": [
+    {
+      "body": "--Print \"Pixera Rocks!\" to the Log output.\npixc.log('Pixera Rocks!')\n\n--Print \"And it will keep rocking.\" after 10 seconds\nUtils.Timer.sleep('10sec')\npixc.log(\"And it will keep rocking.\")\n",
+      "kind": "func",
+      "name": "tellMeAboutPixera"
+    }
+  ],
+  "definedExternally": false,
+  "hostInfo": {
+    "systemType": ""
+  },
+  "license": "1GNTlyr7sewU1l3S6nhV4lan0GBGjOX8CHNLyn03LbmHhVFCUq24BoC69DfzaHB1lUySn2TQix5/ifmDPQfyCuQ7u0r8nt6wJmOzRVR3ldA=",
+  "name": "DemoModule",
+  "properties": [
+    {
+      "cont": "false",
+      "name": "Auto Init",
+      "typeHint": "bool"
+    }
+  ],
+  "separateCode": false,
+  "uiUrl": ""
+}
