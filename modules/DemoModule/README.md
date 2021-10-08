@@ -1,5 +1,7 @@
 # DemoModule
 
+### Version: 1.0.0
+
 DemoModule is a module for telling people about Pixera Control. The main reason it exists, is to show Pixera lovers how to contribute to our collection of custom community modules. Despite all other modules we do not provide any additional files because they are not needed to see how to write a simple README file.
 
 ## 💾 Installation

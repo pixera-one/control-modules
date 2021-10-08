@@ -27,6 +27,7 @@ If you would like to contribute your module please either fork this repository o
 - [x] Your module and the folder containing it are named in **PascalCase**.
 - [x] Your module is tested and it is working with Pixera Control.
 - [x] Your module contains a readme using [this](docs/README_TEMPLATE.md) template.
+- [x] Your module contains a version number in the [SemVer](https://semver.org/) format.
 - [x] Your module is listed in the `docs/MODULES.md` file in your commit.
 
 Have a look at our [DemoModule](modules/DemoModule) for an example.

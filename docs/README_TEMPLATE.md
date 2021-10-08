@@ -1,5 +1,7 @@
 # \<ModuleName\>
 
+### Version: \<major.minor.patch\>
+
 \<Describe the module here\>
 
 ## 💾 Installation
