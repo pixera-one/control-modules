@@ -1,0 +1,732 @@
+{
+ "api": [
+  {
+   "body": "require \"pixcHelper\"\nrequire \"pixcNetwork\"\nif self.helper ~= nil then\n\treturn \nend\nself.helper = createPixcHelper(pixc,self())\nself.network = createPixcNetwork()\nself.connected = false\npixc.log(self.helper)\npixc.log(self.network)\nself.IsConnected(false, true)\nself.ip = self.helper:getProperty(\"IP\",\"192.168.2.140\")\nself.port = tonumber(self.helper:getProperty(\"Port\",\"10606\"))\nself.network:configureTcp(\n\tself.ip,\n\tself.port,\n\tfunction (handle, data) self().receive(data) end,\n\tfunction(handle, error) pixc.log(\"closeCallback: \"..error) end)\nself.network:setStatusCallbacks(\n\tfunction (...) pixc.log(...) end,\n\tfunction(isConnected) self().IsConnected(isConnected, true) end)\nself.network:start()\n",
+   "kind": "func",
+   "name": "init"
+  },
+  {
+   "body": "if self.network == nil then return end\r\nself.network:close()\r\nself.network = nil\r\nself.helper = nil\r\n",
+   "kind": "func",
+   "name": "uninit"
+  },
+  {
+   "attKind": "internal",
+   "body": "pixc.log(\"got data\")\r\npixc.log(msg)\r\nself.data = msg",
+   "kind": "func",
+   "name": "receive",
+   "params": [
+    {
+     "name": "msg",
+     "type": "string"
+    }
+   ],
+   "slotStyle": "leftNone;rightOut;triggerHidden"
+  },
+  {
+   "attKind": "internal",
+   "body": "self.connected = pixcCommon.execAttribute(false, self.connected, isConnected, doSet)\n\nUtils.Timer.sleep(100)\nif isConnected == true then\n\tself.ForMonitorLabel.Refresh()\nend",
+   "kind": "func",
+   "name": "IsConnected",
+   "params": [
+    {
+     "name": "isConnected",
+     "type": "bool"
+    },
+    {
+     "name": "doSet",
+     "type": "bool"
+    }
+   ]
+  },
+  {
+   "attKind": "standard",
+   "attReports": {
+    "0": "1000.00"
+   },
+   "body": "self.A = pixcCommon.execAttribute(0, self.A, val, doSet, true )\nself.TakeTime = math.floor(val)\n-- This action is used only in the Midra4KAWJ Protocol modules.\n-- Please enter the upper limit of the TAKE transition time of Midra4K. If the time is not entered, it will be 1000mS. \n-- Midra4K's TAKE transition time will not be changed.",
+   "kind": "func",
+   "name": "TakeTime",
+   "params": [
+    {
+     "name": "val",
+     "type": "int"
+    }
+   ],
+   "slotStyle": "leftIn;rightNone;triggerHidden"
+  },
+  {
+   "elems": [
+    {
+     "body": "if self.network == nil then return end\nself.network:send('{\"op\":\"replace\",\"path\":\"DeviceObject/transition/$screen/@items/1/control/@props/xTake\",\"value\":true}\\04')\nself.network:send('{\"op\":\"replace\",\"path\":\"DeviceObject/transition/$screen/@items/2/control/@props/xTake\",\"value\":true}\\04')\nself.network:send('{\"op\":\"replace\",\"path\":\"DeviceObject/transition/$auxiliaryScreen/@items/1/control/@props/xTake\",\"value\":true}\\04')\n\nif type(self.TakeTime) ~= \"number\" then\n\tself.TakeAll = 1000\n\telse\n\tself.TakeAll = self.TakeTime\nend\nif self.TakeAll <= 1000 then\n\tself.TakeAllTakeTime = 1000\n\telse\n\tself.TakeAllTakeTime = self.TakeAll\nend\n\t\nUtils.Timer.sleep(self.TakeAllTakeTime)\nUtils.Timer.sleep(100)\nself.ForMonitorLabel.Refresh()\n",
+     "kind": "func",
+     "name": "ALL",
+     "slotStyle": "leftIn;rightNone"
+    },
+    {
+     "body": "if self.network == nil then return end\r\nself.network:send('{\"op\":\"replace\",\"path\":\"DeviceObject/transition/$screen/@items/1/control/@props/xTake\",\"value\":true}\\04')\r\n\r\nif type(self.TakeTime) ~= \"number\" then\r\n\tself.TakeAll = 1000\r\n\telse\r\n\tself.TakeAll = self.TakeTime\r\nend\r\nif self.TakeAll <= 1000 then\r\n\tself.TakeAllTakeTime = 1000\r\n\telse\r\n\tself.TakeAllTakeTime = self.TakeAll\r\nend\r\n\t\r\nUtils.Timer.sleep(self.TakeAllTakeTime)\r\nUtils.Timer.sleep(100)\r\nself.ForMonitorLabel.MasterPresetFromPreview()\r\nUtils.Timer.sleep(10)\r\nself.ForMonitorLabel.Screen1PresetFromPreview()\r\nUtils.Timer.sleep(10)\r\nself.ForMonitorLabel.MasterPresetFromProgram()\r\nUtils.Timer.sleep(10)\r\nself.ForMonitorLabel.Screen1PresetFromProgram()",
+     "kind": "func",
+     "name": "Screen1",
+     "slotStyle": "leftIn;rightNone"
+    },
+    {
+     "body": "if self.network == nil then return end\r\nself.network:send('{\"op\":\"replace\",\"path\":\"DeviceObject/transition/$screen/@items/2/control/@props/xTake\",\"value\":true}\\04')\r\n\r\nif type(self.TakeTime) ~= \"number\" then\r\n\tself.TakeAll = 1000\r\n\telse\r\n\tself.TakeAll = self.TakeTime\r\nend\r\nif self.TakeAll <= 1000 then\r\n\tself.TakeAllTakeTime = 1000\r\n\telse\r\n\tself.TakeAllTakeTime = self.TakeAll\r\nend\r\n\r\nUtils.Timer.sleep(200)\r\nUtils.Timer.sleep(self.TakeAllTakeTime)\r\nUtils.Timer.sleep(100)\r\nself.ForMonitorLabel.MasterPresetFromPreview()\r\nUtils.Timer.sleep(10)\r\nself.ForMonitorLabel.Screen2PresetFromPreview()\r\nUtils.Timer.sleep(10)\r\nself.ForMonitorLabel.MasterPresetFromProgram()\r\nUtils.Timer.sleep(10)\r\nself.ForMonitorLabel.Screen2PresetFromProgram()",
+     "kind": "func",
+     "name": "Screen2",
+     "slotStyle": "leftIn;rightNone"
+    },
+    {
+     "body": "if self.network == nil then return end\r\nself.network:send('{\"op\":\"replace\",\"path\":\"DeviceObject/transition/$auxiliaryScreen/@items/1/control/@props/xTake\",\"value\":true}\\04')\r\n\r\nif type(self.TakeTime) ~= \"number\" then\r\n\tself.TakeAll = 1000\r\n\telse\r\n\tself.TakeAll = self.TakeTime\r\nend\r\nif self.TakeAll <= 1000 then\r\n\tself.TakeAllTakeTime = 1000\r\n\telse\r\n\tself.TakeAllTakeTime = self.TakeAll\r\nend\r\n\r\nUtils.Timer.sleep(200)\r\nUtils.Timer.sleep(self.TakeAllTakeTime)\r\nUtils.Timer.sleep(100)\r\nself.ForMonitorLabel.MasterPresetFromPreview()\r\nUtils.Timer.sleep(10)\r\nself.ForMonitorLabel.Auxiliary1PresetFromPreview()\r\nUtils.Timer.sleep(10)\r\nself.ForMonitorLabel.MasterPresetFromProgram()\r\nUtils.Timer.sleep(10)\r\nself.ForMonitorLabel.Auxiliary1PresetFromProgram()\r\n",
+     "kind": "func",
+     "name": "Auxiliary",
+     "slotStyle": "leftIn;rightNone"
+    },
+    {
+     "body": "if self.network == nil then return end\r\nself.network:send('{\"op\":\"replace\",\"path\":\"DeviceObject/quickPreset/control/@props/enable\",\"value\":true}\\04')\r\n",
+     "kind": "func",
+     "name": "QuickPresetEnable",
+     "slotStyle": "leftIn;rightNone"
+    },
+    {
+     "body": "if self.network == nil then return end\r\nself.network:send('{\"op\":\"replace\",\"path\":\"DeviceObject/quickPreset/control/@props/enable\",\"value\":false}\\04')\r\n",
+     "kind": "func",
+     "name": "QuickPresetDisable",
+     "slotStyle": "leftIn;rightNone"
+    }
+   ],
+   "kind": "ns",
+   "name": "TAKE"
+  },
+  {
+   "elems": [
+    {
+     "attKind": "standard",
+     "attReports": {
+      "0": "65535.00,1.00,1.00,1.00,1.00,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true"
+     },
+     "body": "if self.network == nil then return end\nif type(Value) ~= \"number\" then return end\nif self.TBARstatus == nil then return end\nif self.SPpreviewA == nil then return end\n\nif self.TBARstatus == \"UP\" and self.SPprogramA == \"UP\" then\n\tself.TBARoutA = Value\n\telseif self.TBARstatus == \"DOWN\" and self.SPprogramA == \"DOWN\" then\n\tself.TBARoutA = Value\n\telseif self.TBARstatus == \"DOWN\" and self.SPprogramA == \"UP\" then\n\tself.TBARoutA = (Value - 0)/65535 * (0-65535) + 65535\n\telseif self.TBARstatus == \"UP\" and self.SPprogramA == \"DOWN\" then\n\tself.TBARoutA = (Value - 0)/65535 * (0-65535) + 65535\nend\n\nlocal tbarValue = math.floor(self.TBARoutA)\n\nself.network:send('{\"op\":\"replace\",\"path\":\"DeviceObject/transition/$screen/@items/1/control/@props/tbarPosition\",\"value\":' ..tbarValue.. '}\\04')\n",
+     "kind": "func",
+     "name": "Screen1",
+     "params": [
+      {
+       "name": "Value",
+       "type": "int"
+      }
+     ],
+     "slotStyle": "leftIn;rightNone;triggerHidden"
+    },
+    {
+     "attKind": "standard",
+     "attReports": {
+      "0": "0.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true"
+     },
+     "body": "if self.network == nil then return end\nif type(Value) ~= \"number\" then return end\nif self.TBARstatus == nil then return end\nif self.SPpreviewA == nil then return end\n\nif self.TBARstatus == \"UP\" and self.SPprogramB == \"UP\" then\n\tself.TBARoutB = Value\n\telseif self.TBARstatus == \"DOWN\" and self.SPprogramB == \"DOWN\" then\n\tself.TBARoutB = Value\n\telseif self.TBARstatus == \"DOWN\" and self.SPprogramB == \"UP\" then\n\tself.TBARoutB = (Value - 0)/65535 * (0-65535) + 65535\n\telseif self.TBARstatus == \"UP\" and self.SPprogramB == \"DOWN\" then\n\tself.TBARoutB = (Value - 0)/65535 * (0-65535) + 65535\nend\n\nlocal tbarValue = math.floor(self.TBARoutB)\n\nself.network:send('{\"op\":\"replace\",\"path\":\"DeviceObject/transition/$screen/@items/2/control/@props/tbarPosition\",\"value\":' ..tbarValue.. '}\\04')\n",
+     "kind": "func",
+     "name": "Screen2",
+     "params": [
+      {
+       "name": "Value",
+       "type": "int"
+      }
+     ],
+     "slotStyle": "leftIn;rightNone;triggerHidden"
+    },
+    {
+     "attKind": "standard",
+     "attReports": {
+      "0": "65535.00,1.00,1.00,1.00,1.00,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true"
+     },
+     "body": "if self.network == nil then return end\nif type(Value) ~= \"number\" then return end\nif self.TBARstatus == nil then return end\nif self.APpreviewA == nil then return end\n\nif self.TBARstatus == \"UP\" and self.APprogramA == \"UP\" then\n\tself.TBARoutC = Value\n\telseif self.TBARstatus == \"DOWN\" and self.APprogramA == \"DOWN\" then\n\tself.TBARoutC = Value\n\telseif self.TBARstatus == \"DOWN\" and self.APprogramA == \"UP\" then\n\tself.TBARoutC = (Value - 0)/65535 * (0-65535) + 65535\n\telseif self.TBARstatus == \"UP\" and self.APprogramA == \"DOWN\" then\n\tself.TBARoutC = (Value - 0)/65535 * (0-65535) + 65535\nend\n\nlocal tbarValue = math.floor(self.TBARoutC)\n\nself.network:send('{\"op\":\"replace\",\"path\":\"DeviceObject/transition/$auxiliaryScreen/@items/1/control/@props/tbarPosition\",\"value\":' ..tbarValue.. '}\\04')\n",
+     "kind": "func",
+     "name": "Auxiliary1",
+     "params": [
+      {
+       "name": "Value",
+       "type": "int"
+      }
+     ],
+     "slotStyle": "leftIn;rightNone;triggerHidden"
+    },
+    {
+     "attKind": "standard",
+     "attReports": {
+      "0": "UP"
+     },
+     "body": "self.TBARstatus = pixcCommon.execAttribute(0, self.TBARstatus, val, doSet)\nreturn self.TBARstatus",
+     "kind": "func",
+     "name": "TbarStatus",
+     "params": [
+      {
+       "name": "val",
+       "type": "string"
+      }
+     ],
+     "slotStyle": "leftIn;rightNone;triggerHidden"
+    }
+   ],
+   "kind": "ns",
+   "name": "TBAR"
+  },
+  {
+   "elems": [
+    {
+     "attKind": "standard",
+     "attReports": {
+      "0": "Program"
+     },
+     "body": "self.MPtarget = pixcCommon.execAttribute(0, self.MPtarget, val, doSet, true )\n",
+     "kind": "func",
+     "name": "Target",
+     "params": [
+      {
+       "name": "val",
+       "type": "string"
+      }
+     ],
+     "slotStyle": "leftIn;rightOut;triggerHidden"
+    },
+    {
+     "attKind": "standard",
+     "attReports": {
+      "0": "100.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true"
+     },
+     "body": "if self.network == nil then return end\nif type(val) ~= \"number\" then return end\nif self.MPtarget == nil then return end\nif self.MPtarget == \"Program\" then\n\tself.RMPTarget = \"PROGRAM\"\n\telseif self.MPtarget == \"Preview\" then\n\tself.RMPTarget = \"PREVIEW\"\nend\nlocal Memory = math.floor(tonumber(val))\n\nself.network:send('{\"op\":\"replace\",\"path\":\"DeviceObject/preset/masterBank/control/load/$slot/@items/' ..Memory.. '/$preset/@items/' ..self.RMPTarget.. '/@props/xRequest\",\"value\":true}\\04')\n",
+     "kind": "func",
+     "name": "MemoryID",
+     "params": [
+      {
+       "name": "val",
+       "type": "int"
+      }
+     ],
+     "slotStyle": "leftIn;rightNone;triggerHidden"
+    }
+   ],
+   "kind": "ns",
+   "name": "RecallingMasterPreset"
+  },
+  {
+   "elems": [
+    {
+     "attKind": "standard",
+     "attReports": {
+      "0": "Preview"
+     },
+     "body": "self.SPtarget = pixcCommon.execAttribute(0, self.SPtarget, val, doSet, true )\r\n",
+     "kind": "func",
+     "name": "Target",
+     "params": [
+      {
+       "name": "val",
+       "type": "string"
+      }
+     ],
+     "slotStyle": "leftIn;rightOut;triggerHidden"
+    },
+    {
+     "attKind": "standard",
+     "attReports": {
+      "0": "0.00"
+     },
+     "body": "self.SPIDdisplay = pixcCommon.execAttribute(0, self.SPIDdisplay, val, doSet, true )\n\nif val == \"Screen1\" then\n\tself.SPID = 1\n\telseif val == \"Screen2\" then\n\tself.SPID = 2\n\telseif val == \"Auxiliary1\" then\n\tself.SPID = 1\nend\nif val == \"Screen1\" then\n\tself.ScreenSATarget = \"screen\"\n\telseif val == \"Screen2\" then\n\tself.ScreenSATarget = \"screen\"\n\telseif val == \"Auxiliary1\" then\n\tself.ScreenSATarget = \"auxiliaryScreen\"\nend\n",
+     "kind": "func",
+     "name": "ScreenAuxID",
+     "params": [
+      {
+       "name": "val",
+       "type": "int"
+      }
+     ],
+     "slotStyle": "leftIn;rightNone;triggerHidden"
+    },
+    {
+     "attKind": "standard",
+     "attReports": {
+      "0": "5.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true"
+     },
+     "body": "if self.network == nil then return end\nif self.SPID == nil then return end\nif self.ScreenSATarget == nil then return end\nif self.SPtarget == nil then return end\nif self.SPtarget == \"Program\" then\n\tself.SPtargetName = \"PROGRAM\"\n\telseif self.SPtarget == \"Preview\" then\n\tself.SPtargetName = \"PREVIEW\"\nend\nlocal Memory = math.floor(tonumber(val))\nlocal ID = math.floor(tonumber(self.SPID))\n\nself.network:send('{\"op\":\"replace\",\"path\":\"DeviceObject/preset/bank/control/load/$slot/@items/' ..Memory.. '/$' ..self.ScreenSATarget.. '/@items/' ..ID.. '/$preset/@items/' ..self.SPtargetName.. '/@props/xRequest\",\"value\":true}\\04')\n",
+     "kind": "func",
+     "name": "MemoryID",
+     "params": [
+      {
+       "name": "val",
+       "type": "int"
+      }
+     ],
+     "slotStyle": "leftIn;rightNone;triggerHidden"
+    },
+    {
+     "attKind": "standard",
+     "attReports": {
+      "0": "0.00"
+     },
+     "body": "self.SPL = pixcCommon.execAttribute(0, self.SPL, self.SPIDdisplay, doSet)\r\nreturn self.SPL",
+     "kind": "func",
+     "name": "ScreenLabel",
+     "slotStyle": "leftNone;rightNone;triggerHidden"
+    },
+    {
+     "body": "if self.network == nil then return end\nif self.ScreenSATarget == nil then return end\nif self.SPID == nil then return end\nlocal ID = math.floor(tonumber(self.SPID))\nself.network:send('{\"op\":\"replace\",\"path\":\"DeviceObject/transition/$' ..self.ScreenSATarget.. '/@items/' ..ID.. '/control/@props/xTake\",\"value\":true}\\04')\n\nif type(self.TakeTime) ~= \"number\" then\n\tself.SPTakeTime = 1000\n\telse\n\tself.SPTakeTime = self.TakeTime\nend\nif self.SPTakeTime <= 1000 then\n\tself.SPTakeTakeTime = 1000\n\telse\n\tself.SPTakeTakeTime = self.SPTakeTime\nend\n\t\nUtils.Timer.sleep(self.SPTakeTakeTime)\nUtils.Timer.sleep(100)\nself.ForMonitorLabel.Refresh()",
+     "kind": "func",
+     "name": "TAKE",
+     "slotStyle": "leftNone;rightNone"
+    }
+   ],
+   "kind": "ns",
+   "name": "RecallingScreenPreset"
+  },
+  {
+   "elems": [
+    {
+     "attKind": "standard",
+     "attReports": {
+      "0": "Program"
+     },
+     "body": "self.LSTarget = pixcCommon.execAttribute(0, self.LSTarget, val, doSet, true )\n",
+     "kind": "func",
+     "name": "Target",
+     "params": [
+      {
+       "name": "val",
+       "type": "string"
+      }
+     ],
+     "slotStyle": "leftIn;rightOut;triggerHidden"
+    },
+    {
+     "attKind": "standard",
+     "attReports": {
+      "0": "Screen1"
+     },
+     "body": "self.LSSAIDdisplay = pixcCommon.execAttribute(0, self.LSSAIDdisplay, val, doSet, true )\n\nif val == \"Screen1\" then\n\tself.LSScreenID = 1\n\telseif val == \"Screen2\" then\n\tself.LSScreenID = 2\n\telseif val == \"Auxiliary1\" then\n\tself.LSScreenID = 1\nend\nif val == \"Screen1\" then\n\tself.LayerSATname = \"screen\"\n\telseif val == \"Screen2\" then\n\tself.LayerSATname = \"screen\"\n\telseif val == \"Auxiliary1\" then\n\tself.LayerSATname = \"auxiliaryScreen\"\nend\n",
+     "kind": "func",
+     "name": "ScreenAuxID",
+     "params": [
+      {
+       "name": "val",
+       "type": "string"
+      }
+     ],
+     "slotStyle": "leftIn;rightNone;triggerHidden"
+    },
+    {
+     "attKind": "standard",
+     "attReports": {
+      "0": ""
+     },
+     "body": "if self.network == nil then return end\nif self.LSTarget == nil then return end\nif self.LSScreenID == nil then return end\nif self.LayerSATname == nil then return end\nlocal ScreenID = math.floor(tonumber(self.LSScreenID))\n\nself.network:send('{\"op\":\"get\",\"path\":\"DeviceObject/transition/$' ..self.LayerSATname.. '/@items/' ..ScreenID.. '/status/@props/transition\"}\\04')\nUtils.Timer.sleep(10)\nif self.data == nil then return end\nif self.LayerSATname == \"screen\" then\n\tself.GetTbar = string.sub(self.data, 89, -4)\n\telseif self.LayerSATname == \"auxiliaryScreen\" then\n\tself.GetTbar = string.sub(self.data, 98, -4)\nend\nif self.GetTbar == \"UP\" and self.LSTarget == \"Program\" then\n\tself.statusA = \"UP\"\n\telseif self.GetTbar == \"UP\" and self.LSTarget == \"Preview\" then\n\tself.statusA = \"DOWN\"\n\telseif self.GetTbar == \"DOWN\" and self.LSTarget == \"Program\" then\n\tself.statusA = \"DOWN\"\n\telseif self.GetTbar == \"DOWN\" and self.LSTarget == \"Preview\" then\n\tself.statusA = \"UP\"\nend\n\nself.LSTbarStatus = pixcCommon.execAttribute(0, self.LSTbarStatus, self.statusA, doSet, true )\n",
+     "kind": "func",
+     "name": "GetTBarStatus",
+     "slotStyle": "leftNone;rightNone;triggerHidden"
+    },
+    {
+     "attKind": "standard",
+     "attReports": {
+      "0": "Foreground"
+     },
+     "body": "if self.LSSAIDdisplay == nil then return end\n\nif val == \"Layer1\" then\n\tself.LSLayer = string.sub(val, 6, -1)\n\telseif val == \"Layer2\" then\n\tself.LSLayer = string.sub(val, 6, -1)\n\telseif val == \"Layer3\" then\n\tself.LSLayer = string.sub(val, 6, -1)\n\telseif val == \"Layer4\" then\n\tself.LSLayer = string.sub(val, 6, -1)\nend\n\nif self.LSSAIDdisplay == \"Auxiliary1\" then\n\tself.SourceTarget = \"background\"\n\telseif val == \"Foreground\" then\n\tself.SourceTarget = \"top\"\n\telseif val == \"Background\"then\n\tself.SourceTarget = \"background\"\n\telse\n\tself.SourceTarget = \"$liveLayer\"\nend\n\nif self.LSSAIDdisplay == \"Auxiliary1\" then\n\tself.LSSourceTarget = \"content\"\n\telseif val == \"Foreground\" then\n\tself.LSSourceTarget = \"frame\"\n\telseif val == \"Background\"then\n\tself.LSSourceTarget = \"set\"\n\telse\n\tself.LSSourceTarget = \"input\"\nend\n\nself.LSLayerID = pixcCommon.execAttribute(0, self.LSLayerID, val, doSet, true )\nself.LLlabel = math.floor(tonumber(self.LSLayer))\n",
+     "kind": "func",
+     "name": "LayerID",
+     "params": [
+      {
+       "name": "val",
+       "type": "string"
+      }
+     ],
+     "slotStyle": "leftIn;rightNone;triggerHidden"
+    },
+    {
+     "attKind": "standard",
+     "attReports": {
+      "0": "10.00"
+     },
+     "body": "self.LSSource = pixcCommon.execAttribute(0, self.LSSource, val, doSet, true )\nself.ChangeLayerSource.GetTBarStatus()\nUtils.Timer.sleep(3)\nself.ChangeLayerSource.ChangeLayer()",
+     "kind": "func",
+     "name": "SourceID",
+     "params": [
+      {
+       "name": "val",
+       "type": "int"
+      }
+     ],
+     "slotStyle": "leftIn;rightNone;triggerHidden"
+    },
+    {
+     "body": "if self.network == nil then return end\nif self.LayerSATname == nil then return end\nif self.LSScreenID == nil then return end\nif self.LSTbarStatus == nil then return end\nif self.LLlabel == nil then return end\nif self.SourceTarget == nil then return end\nif self.LSSourceTarget == nil then return end\nif self.LSSource == nil then return end\n\nlocal Screen = math.floor(tonumber(self.LSScreenID))\nlocal Source = math.floor(tonumber(self.LSSource))\n\nif self.SourceTarget == \"$liveLayer\" then\n\tself.LSCLayer = \"/@items/\"..self.LLlabel\n\telseif self.SourceTarget ~= \"$liveLayer\" then\n\tself.LSCLayer = \"\"\nend\nif self.SourceTarget == \"$liveLayer\" then\n\tself.LSCLSourceName = \"INPUT_\"\n\telseif self.LayerSATname == \"auxiliaryScreen\" then\n\tself.LSCLSourceName = \"INPUT_\"\n\telseif self.SourceTarget ~= \"$liveLayer\" then\n\tself.LSCLSourceName = \"\"\nend\n\nself.network:send('{\"op\":\"replace\",\"path\":\"DeviceObject/$' ..self.LayerSATname.. '/@items/' ..Screen.. '/$preset/@items/' ..self.LSTbarStatus.. '/' ..self.SourceTarget..self.LSCLayer.. '/source/@props/' ..self.LSSourceTarget.. '\",\"value\":\"' ..self.LSCLSourceName..Source.. '\"}\\04')\nself.network:send('{\"op\":\"replace\",\"path\":\"DeviceObject/preset/control/@props/xUpdate\",\"value\":true}\\04')",
+     "kind": "func",
+     "name": "ChangeLayer",
+     "slotStyle": "leftNone;rightNone;triggerHidden"
+    },
+    {
+     "attKind": "standard",
+     "attReports": {
+      "0": "Screen1"
+     },
+     "body": "self.layerSL = pixcCommon.execAttribute(0, self.layerSL, self.LSSAIDdisplay, doSet)\nreturn self.layerSL",
+     "kind": "func",
+     "name": "ScreenLabel",
+     "params": [
+      {
+       "name": "val",
+       "type": "string"
+      }
+     ],
+     "slotStyle": "leftNone;rightNone;triggerHidden"
+    },
+    {
+     "attKind": "standard",
+     "attReports": {
+      "0": "Background,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true"
+     },
+     "body": "if self.LSSAIDdisplay == nil then return end\nif self.SourceTarget == nil then return end\nif self.LLlabel == nil then return end\n\nif self.LSSAIDdisplay == \"Auxiliary1\" then\n\tself.LSLayerLabel = \"Background\"\n\telseif self.SourceTarget == \"$liveLayer\" then\n\tself.LSLayerLabel = \"Layer\" ..self.LLlabel\n\telseif self.SourceTarget == \"top\" then\n\tself.LSLayerLabel = \"Foreground\"\n\telseif self.SourceTarget == \"background\" then\n\tself.LSLayerLabel = \"Background\"\nend\n\nself.layerLL = pixcCommon.execAttribute(0, self.layerLL, self.LSLayerLabel, doSet)\nreturn self.layerLL",
+     "kind": "func",
+     "name": "LayerLabel",
+     "slotStyle": "leftNone;rightNone;triggerHidden"
+    },
+    {
+     "attKind": "standard",
+     "attReports": {
+      "0": "Foreground Image"
+     },
+     "body": "if self.LSSAIDdisplay == nil then return end\nif self.SourceTarget == nil then return end\nif self.LSSource == nil then return end\n\nlocal SourceID = math.floor(tonumber(self.LSSource))\n\nif self.LSSAIDdisplay == \"Auxiliary1\" then\n\tself.LSSourceLabel = \"Input\"..SourceID\n\telseif self.SourceTarget == \"$liveLayer\" then\n\tself.LSSourceLabel = \"Input\"..SourceID\n\telseif self.SourceTarget == \"top\" and self.LSSource >= 5 then\n\tself.LSSourceLabel = \"Foreground Image\"\n\telseif self.SourceTarget == \"background\" and self.LSSource >= 5 then\n\tself.LSSourceLabel = \"Background Image\"\n\telseif self.SourceTarget == \"top\" then\n\tself.LSSourceLabel = \"Foreground Image\"..SourceID\n\telseif self.SourceTarget == \"background\" then\n\tself.LSSourceLabel = \"Background Image\"..SourceID\nend\n\nself.layerSourceL = pixcCommon.execAttribute(0, self.layerSourceL, self.LSSourceLabel, doSet)\nreturn self.layerSourceL",
+     "kind": "func",
+     "name": "SourceLabel",
+     "slotStyle": "leftNone;rightNone;triggerHidden"
+    },
+    {
+     "body": "if self.network == nil then return end\nif self.LayerSATname == nil then return end\nif self.LSScreenID == nil then return end\nlocal ID = math.floor(tonumber(self.LSScreenID))\nself.network:send('{\"op\":\"replace\",\"path\":\"DeviceObject/transition/$' ..self.LayerSATname.. '/@items/' ..ID.. '/control/@props/xTake\",\"value\":true}\\04')\n\nif type(self.TakeTime) ~= \"number\" then\n\tself.LSTakeTime = 1000\n\telse\n\tself.LSTakeTime = self.TakeTime\nend\nif self.LSTakeTime <= 1000 then\n\tself.LSTakeTakeTime = 1000\n\telse\n\tself.LSTakeTakeTime = self.LSTakeTime\nend\n\t\nUtils.Timer.sleep(self.LSTakeTakeTime)\nUtils.Timer.sleep(100)\nself.ForMonitorLabel.Refresh()",
+     "kind": "func",
+     "name": "TAKE",
+     "slotStyle": "leftNone;rightNone"
+    }
+   ],
+   "kind": "ns",
+   "name": "ChangeLayerSource"
+  },
+  {
+   "elems": [
+    {
+     "attKind": "standard",
+     "attReports": {
+      "0": "1.00"
+     },
+     "body": "self.ISScreenID = pixcCommon.execAttribute(0, self.ISScreenID, val, doSet, true )\n",
+     "kind": "func",
+     "name": "ScreenID",
+     "params": [
+      {
+       "name": "val",
+       "type": "int"
+      }
+     ],
+     "slotStyle": "leftIn;rightOut;triggerHidden"
+    },
+    {
+     "attKind": "standard",
+     "attReports": {
+      "0": "Foreground"
+     },
+     "body": "self.ISFBT = pixcCommon.execAttribute(0, self.ISFBT, val, doSet, true )\n\nif val == \"Foreground\" then\n\tself.ISForeBackTarget = \"top\"\n\telseif val == \"Background\" then\n\tself.ISForeBackTarget = \"back\"\nend\n",
+     "kind": "func",
+     "name": "Target",
+     "params": [
+      {
+       "name": "val",
+       "type": "string"
+      }
+     ],
+     "slotStyle": "leftIn;rightOut;triggerHidden"
+    },
+    {
+     "attKind": "standard",
+     "attReports": {
+      "0": "1.00"
+     },
+     "body": "self.ISSlotID = pixcCommon.execAttribute(0, self.ISSlotID, val, doSet, true )\n",
+     "kind": "func",
+     "name": "SlotID",
+     "params": [
+      {
+       "name": "val",
+       "type": "int"
+      }
+     ],
+     "slotStyle": "leftIn;rightOut;triggerHidden"
+    },
+    {
+     "attKind": "standard",
+     "attReports": {
+      "0": "50.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true"
+     },
+     "body": "if self.network == nil then return end\nif self.ISScreenID == nil then return end\nif self.ISForeBackTarget == nil then return end\nif self.ISSlotID == nil then return end\n\nlocal ScreenID = math.floor(tonumber(self.ISScreenID))\nlocal SlotID = math.floor(tonumber(self.ISSlotID))\nlocal LibraryID = math.floor(tonumber(val))\n\nself.network:send('{\"op\":\"replace\",\"path\":\"DeviceObject/$screen/@items/' ..ScreenID.. '/$' ..self.ISForeBackTarget.. 'Frame/@items/' ..SlotID.. '/control/@props/librarySlot\",\"value\":\"' ..LibraryID.. '\"}\\04')\n",
+     "kind": "func",
+     "name": "LibraryID",
+     "params": [
+      {
+       "name": "val",
+       "type": "int"
+      }
+     ],
+     "slotStyle": "leftIn;rightOut;triggerHidden"
+    }
+   ],
+   "kind": "ns",
+   "name": "ChangeImageSlot"
+  },
+  {
+   "elems": [
+    {
+     "attKind": "standard",
+     "attReports": {
+      "0": "Screen1"
+     },
+     "body": "self.AudioSAdisplay = pixcCommon.execAttribute(0, self.AudioSAdisplay, val, doSet, true )\n\nif val == \"Screen1\" then\n\tself.AudioSAID = 1\n\telseif val == \"Screen2\" then\n\tself.AudioSAID = 2\n\telseif val == \"Auxiliary1\" then\n\tself.AudioSAID = 1\nend\nif val == \"Screen1\" then\n\tself.AudioSAname = \"screen\"\n\telseif val == \"Screen2\" then\n\tself.AudioSAname = \"screen\"\n\telseif val == \"Auxiliary1\" then\n\tself.AudioSAname = \"auxiliaryScreen\"\nend\n",
+     "kind": "func",
+     "name": "ScreenAuxID",
+     "params": [
+      {
+       "name": "val",
+       "type": "string"
+      }
+     ],
+     "slotStyle": "leftIn;rightNone;triggerHidden"
+    },
+    {
+     "attKind": "standard",
+     "attReports": {
+      "0": "Layer1,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true"
+     },
+     "body": "if type(val) ~= \"string\" then return end\nif self.network == nil then return end\nif self.AudioSAname == nil then return end\nif type(self.AudioSAID) ~= \"number\" then return end\nlocal follow = string.sub(val, 1, -2)\nif follow == \"Layer\" then\n\tself.ASISTarget = \"followLiveLayer\"\n\telseif follow ~= \"Layer\" then\n\tself.ASISTarget = \"directRouting\"\nend\nif follow == \"Layer\" then\n\tself.ASISSouceLayer = \"layer\"\n\telseif follow ~= \"Layer\" then\n\tself.ASISSouceLayer = \"source\"\nend\nif val == \"Layer1\" then\n\tself.ASISSourceID = \"1\"\n\telseif val == \"Layer2\" then\n\tself.ASISSourceID = \"2\"\n\telseif val == \"Layer3\" then\n\tself.ASISSourceID = \"3\"\n\telseif val == \"Layer4\" then\n\tself.ASISSourceID = \"4\"\n\telse\n\tself.ASISSourceID = val\nend\nlocal ScreenAuxID = math.floor(tonumber(self.AudioSAID))\n\nself.network:send('{\"op\":\"replace\",\"path\":\"DeviceObject/$' ..self.AudioSAname.. '/@items/' ..ScreenAuxID.. '/audio/control/' ..self.ASISTarget.. '/@props/' ..self.ASISSouceLayer.. '\",\"value\":\"' ..self.ASISSourceID.. '\"}\\04')\n",
+     "kind": "func",
+     "name": "InputSource",
+     "params": [
+      {
+       "name": "val",
+       "type": "string"
+      }
+     ],
+     "slotStyle": "leftIn;rightNone;triggerHidden"
+    }
+   ],
+   "kind": "ns",
+   "name": "ChangeAudioSource"
+  },
+  {
+   "elems": [
+    {
+     "body": "if self.network == nil then return end\nself.network:send('{\"op\":\"replace\",\"path\":\"DeviceObject/system/shutdown/@props/xReboot\",\"value\":true}\\04')\n",
+     "kind": "func",
+     "name": "Restart",
+     "slotStyle": "leftIn;rightNone"
+    },
+    {
+     "body": "if self.network == nil then return end\nself.network:send('{\"op\":\"replace\",\"path\":\"DeviceObject/system/shutdown/standby/control/@props/xRequest\",\"value\":\"STANDBY\"}\\04')\n",
+     "kind": "func",
+     "name": "Standby",
+     "slotStyle": "leftIn;rightNone"
+    },
+    {
+     "body": "if self.network == nil then return end\nself.network:send('{\"op\":\"replace\",\"path\":\"DeviceObject/system/shutdown/standby/control/@props/xRequest\",\"value\":\"SWITCH_OFF\"}\\04')\n",
+     "kind": "func",
+     "name": "Shutdown",
+     "slotStyle": "leftIn;rightNone"
+    },
+    {
+     "body": "if self.network == nil then return end\nself.network:send('{\"op\":\"replace\",\"path\":\"DeviceObject/system/shutdown/standby/control/@props/xRequest\",\"value\":\"WAKE_UP\"}\\04')\n",
+     "kind": "func",
+     "name": "WakeUp",
+     "slotStyle": "leftIn;rightNone"
+    }
+   ],
+   "kind": "ns",
+   "name": "System"
+  },
+  {
+   "elems": [
+    {
+     "body": "if self.network == nil then return end\n\nself.network:send('{\"op\":\"get\",\"path\":\"DeviceObject/preset/masterBank/status/lastUsed/$presetMode/@items/PREVIEW/@props/memoryId\"}\\04')\nUtils.Timer.sleep(10)\nif self.data == nil then return end\nlocal MP = string.sub(self.data, 109, -3)\nif MP ~= \"0\" then\n\tself.network:send('{\"op\":\"get\",\"path\":\"DeviceObject/preset/masterBank/$slot/@items/' ..MP.. '/control/@props/label\"}\\04')\nend\nUtils.Timer.sleep(10)\nlocal MPint = tonumber(MP)\nif MPint <= 9 then\n\tself.MPLabelA = string.sub(self.data, 87, -4)\n\telseif MPint >= 10 and MPint <= 99 then\n\tself.MPLabelA = string.sub(self.data, 88, -4)\n\telseif MPint >= 100 and MPint <= 999 then\n\tself.MPLabelA = string.sub(self.data, 89, -4)\nend\nif MP == \"0\" then\n\tself.MPnameA = \"None\"\n\telseif self.MPLabelA == \"\" then\n\tself.MPnameA = \"Preset\"..MP\n\telseif self.MPLabelA ~= \"\" then\n\tself.MPnameA = self.MPLabelA\nend\n",
+     "kind": "func",
+     "name": "MasterPresetFromPreview",
+     "slotStyle": "leftNone;rightNone;triggerHidden"
+    },
+    {
+     "attKind": "standard",
+     "attReports": {
+      "0": "0.00"
+     },
+     "body": "self.MPdisplayA = pixcCommon.execAttribute(0, self.MPdisplayA, self.MPnameA, doSet)\nreturn self.MPdisplayA",
+     "kind": "func",
+     "name": "MasterPreviewLabel",
+     "slotStyle": "leftNone;rightNone;triggerHidden"
+    },
+    {
+     "body": "if self.network == nil then return end\n\nself.network:send('{\"op\":\"get\",\"path\":\"DeviceObject/transition/$screen/@items/1/status/@props/transition\"}\\04')\nUtils.Timer.sleep(10)\nif self.data == nil then return end\nlocal tbar = string.sub(self.data, 89, -4)\nif tbar == \"UP\" then\n\tself.SPpreviewA = \"DOWN\"\n\telseif tbar == \"DOWN\" then\n\tself.SPpreviewA = \"UP\"\nend\nUtils.Timer.sleep(10)\nself.network:send('{\"op\":\"get\",\"path\":\"DeviceObject/$screen/@items/1/$preset/@items/' ..self.SPpreviewA.. '/status/@props/memoryId\"}\\04')\nUtils.Timer.sleep(10)\nif self.SPpreviewA == \"UP\" then\n\tself.SPPreA = string.sub(self.data, 90, -3)\n\telseif self.SPpreviewA == \"DOWN\" then\n\tself.SPPreA = string.sub(self.data, 92, -3)\nend\nif self.SPPreA ~= \"0\" then\n\tself.network:send('{\"op\":\"get\",\"path\":\"DeviceObject/preset/bank/$slot/@items/' ..self.SPPreA.. '/control/@props/label\"}\\04')\nend\nUtils.Timer.sleep(10)\nlocal SPvalue = tonumber(self.SPPreA)\nif SPvalue <= 9 then\n\tself.SPPreviewLabelA = string.sub(self.data, 82, -4)\n\telseif SPvalue >= 10 and SPvalue <= 99 then\n\tself.SPPreviewLabelA = string.sub(self.data, 83, -4)\n\telseif SPvalue >= 100 and SPvalue <= 999 then\n\tself.SPPreviewLabelA = string.sub(self.data, 84, -4)\nend\nif self.SPPreA == \"0\" then\n\tself.SPPreviewnameA = \"None\"\n\telseif self.SPPreviewLabelA == \"\" then\n\tself.SPPreviewnameA = \"Preset\"..self.SPPreA\n\telseif self.SPPreviewLabelA ~= \"\" then\n\tself.SPPreviewnameA = self.SPPreviewLabelA\nend\n",
+     "kind": "func",
+     "name": "Screen1PresetFromPreview",
+     "slotStyle": "leftNone;rightNone;triggerHidden"
+    },
+    {
+     "attKind": "standard",
+     "attReports": {
+      "0": "0.00"
+     },
+     "body": "self.SPPreviewdisplayA = pixcCommon.execAttribute(0, self.SPPreviewdisplayA, self.SPPreviewnameA, doSet)\nreturn self.SPPreviewdisplayA",
+     "kind": "func",
+     "name": "Screen1PreviewLabel",
+     "slotStyle": "leftNone;rightNone;triggerHidden"
+    },
+    {
+     "body": "if self.network == nil then return end\n\nself.network:send('{\"op\":\"get\",\"path\":\"DeviceObject/transition/$screen/@items/2/status/@props/transition\"}\\04')\nUtils.Timer.sleep(10)\nif self.data == nil then return end\nlocal tbar = string.sub(self.data, 89, -4)\nif tbar == \"UP\" then\n\tself.SPpreviewB = \"DOWN\"\n\telseif tbar == \"DOWN\" then\n\tself.SPpreviewB = \"UP\"\nend\nUtils.Timer.sleep(10)\nself.network:send('{\"op\":\"get\",\"path\":\"DeviceObject/$screen/@items/2/$preset/@items/' ..self.SPpreviewB.. '/status/@props/memoryId\"}\\04')\nUtils.Timer.sleep(10)\nif self.SPpreviewB == \"UP\" then\n\tself.SPPreB = string.sub(self.data, 90, -3)\n\telseif self.SPpreviewB == \"DOWN\" then\n\tself.SPPreB = string.sub(self.data, 92, -3)\nend\nif self.SPPreB ~= \"0\" then\n\tself.network:send('{\"op\":\"get\",\"path\":\"DeviceObject/preset/bank/$slot/@items/' ..self.SPPreB.. '/control/@props/label\"}\\04')\nend\nUtils.Timer.sleep(10)\nlocal SPvalue = tonumber(self.SPPreB)\nif SPvalue <= 9 then\n\tself.SPPreviewLabelB = string.sub(self.data, 82, -4)\n\telseif SPvalue >= 10 and SPvalue <= 99 then\n\tself.SPPreviewLabelB = string.sub(self.data, 83, -4)\n\telseif SPvalue >= 100 and SPvalue <= 999 then\n\tself.SPPreviewLabelB = string.sub(self.data, 84, -4)\nend\nif self.SPPreB == \"0\" then\n\tself.SPPreviewnameB = \"None\"\n\telseif self.SPPreviewLabelB == \"\" then\n\tself.SPPreviewnameB = \"Preset\"..self.SPPreB\n\telseif self.SPPreviewLabelB ~= \"\" then\n\tself.SPPreviewnameB = self.SPPreviewLabelB\nend\n",
+     "kind": "func",
+     "name": "Screen2PresetFromPreview",
+     "slotStyle": "leftNone;rightNone;triggerHidden"
+    },
+    {
+     "attKind": "standard",
+     "attReports": {
+      "0": "0.00"
+     },
+     "body": "self.SPPreviewdisplayB = pixcCommon.execAttribute(0, self.SPPreviewdisplayB, self.SPPreviewnameB, doSet)\nreturn self.SPPreviewdisplayB",
+     "kind": "func",
+     "name": "Screen2PreviewLabel",
+     "slotStyle": "leftNone;rightNone;triggerHidden"
+    },
+    {
+     "body": "if self.network == nil then return end\n\nself.network:send('{\"op\":\"get\",\"path\":\"DeviceObject/transition/$auxiliaryScreen/@items/1/status/@props/transition\"}\\04')\nUtils.Timer.sleep(10)\nif self.data == nil then return end\nlocal tbar = string.sub(self.data, 98, -4)\nif tbar == \"UP\" then\n\tself.APpreviewA = \"DOWN\"\n\telseif tbar == \"DOWN\" then\n\tself.APpreviewA = \"UP\"\nend\nUtils.Timer.sleep(10)\nself.network:send('{\"op\":\"get\",\"path\":\"DeviceObject/$auxiliaryScreen/@items/1/$preset/@items/' ..self.APpreviewA.. '/status/@props/memoryId\"}\\04')\nUtils.Timer.sleep(10)\nif self.APpreviewA == \"UP\" then\n\tself.APPreA = string.sub(self.data, 99, -3)\n\telseif self.APpreviewA == \"DOWN\" then\n\tself.APPreA = string.sub(self.data, 101, -3)\nend\nif self.APPreA ~= \"0\" then\n\tself.network:send('{\"op\":\"get\",\"path\":\"DeviceObject/preset/auxBank/$slot/@items/' ..self.APPreA.. '/control/@props/label\"}\\04')\nend\nUtils.Timer.sleep(10)\nlocal APvalue = tonumber(self.APPreA)\nif APvalue <= 9 then\n\tself.APPreviewLabelA = string.sub(self.data, 85, -4)\n\telseif APvalue >= 10 and APvalue <= 99 then\n\tself.APPreviewLabelA = string.sub(self.data, 86, -4)\n\telseif APvalue >= 100 and APvalue <= 999 then\n\tself.APPreviewLabelA = string.sub(self.data, 87, -4)\nend\nif self.APPreA == \"0\" then\n\tself.APPreviewnameA = \"None\"\n\telseif self.APPreviewLabelA == \"\" then\n\tself.APPreviewnameA = \"Preset\"..self.APPreA\n\telseif self.APPreviewLabelA ~= \"\" then\n\tself.APPreviewnameA = self.APPreviewLabelA\nend\n",
+     "kind": "func",
+     "name": "Auxiliary1PresetFromPreview",
+     "slotStyle": "leftNone;rightNone;triggerHidden"
+    },
+    {
+     "attKind": "standard",
+     "attReports": {
+      "0": "0.00"
+     },
+     "body": "self.APPreviewdisplayA = pixcCommon.execAttribute(0, self.APPreviewdisplayA, self.APPreviewnameA, doSet)\nreturn self.APPreviewdisplayA",
+     "kind": "func",
+     "name": "Auxiliary1PreviewLabel",
+     "slotStyle": "leftNone;rightNone;triggerHidden"
+    },
+    {
+     "body": "if self.network == nil then return end\n\nself.network:send('{\"op\":\"get\",\"path\":\"DeviceObject/preset/masterBank/status/lastUsed/$presetMode/@items/PROGRAM/@props/memoryId\"}\\04')\nUtils.Timer.sleep(10)\nif self.data == nil then return end\nlocal MP = string.sub(self.data, 109, -3)\nif MP ~= \"0\" then\n\tself.network:send('{\"op\":\"get\",\"path\":\"DeviceObject/preset/masterBank/$slot/@items/' ..MP.. '/control/@props/label\"}\\04')\nend\nUtils.Timer.sleep(10)\nlocal MPint = tonumber(MP)\nif MPint <= 9 then\n\tself.MPLabelB = string.sub(self.data, 87, -4)\n\telseif MPint >= 10 and MPint <= 99 then\n\tself.MPLabelB = string.sub(self.data, 88, -4)\n\telseif MPint >= 100 and MPint <= 999 then\n\tself.MPLabelB = string.sub(self.data, 89, -4)\nend\nif MP == \"0\" then\n\tself.MPnameB = \"None\"\n\telseif self.MPLabelB == \"\" then\n\tself.MPnameB = \"Preset\"..MP\n\telseif self.MPLabelB ~= \"\" then\n\tself.MPnameB = self.MPLabelB\nend\n",
+     "kind": "func",
+     "name": "MasterPresetFromProgram",
+     "slotStyle": "leftNone;rightNone;triggerHidden"
+    },
+    {
+     "attKind": "standard",
+     "attReports": {
+      "0": "0.00"
+     },
+     "body": "self.MPdisplayB = pixcCommon.execAttribute(0, self.MPdisplayB, self.MPnameB, doSet)\nreturn self.MPdisplayB",
+     "kind": "func",
+     "name": "MasterProglamLabel",
+     "slotStyle": "leftNone;rightNone;triggerHidden"
+    },
+    {
+     "body": "if self.network == nil then return end\n\nself.network:send('{\"op\":\"get\",\"path\":\"DeviceObject/transition/$screen/@items/1/status/@props/transition\"}\\04')\nUtils.Timer.sleep(10)\nif self.data == nil then return end\nlocal tbar = string.sub(self.data, 89, -4)\nif tbar == \"UP\" then\n\tself.SPprogramA = \"UP\"\n\telseif tbar == \"DOWN\" then\n\tself.SPprogramA = \"DOWN\"\nend\nUtils.Timer.sleep(10)\nself.network:send('{\"op\":\"get\",\"path\":\"DeviceObject/$screen/@items/1/$preset/@items/' ..self.SPprogramA.. '/status/@props/memoryId\"}\\04')\nUtils.Timer.sleep(10)\nif self.SPprogramA == \"UP\" then\n\tself.SPproA = string.sub(self.data, 90, -3)\n\telseif self.SPprogramA == \"DOWN\" then\n\tself.SPproA = string.sub(self.data, 92, -3)\nend\nif self.SPproA ~= \"0\" then\n\tself.network:send('{\"op\":\"get\",\"path\":\"DeviceObject/preset/bank/$slot/@items/' ..self.SPproA.. '/control/@props/label\"}\\04')\nend\nUtils.Timer.sleep(10)\nlocal SPvalue = tonumber(self.SPproA)\nif SPvalue <= 9 then\n\tself.SPProgramLabelA = string.sub(self.data, 82, -4)\n\telseif SPvalue >= 10 and SPvalue <= 99 then\n\tself.SPProgramLabelA = string.sub(self.data, 83, -4)\n\telseif SPvalue >= 100 and SPvalue <= 999 then\n\tself.SPProgramLabelA = string.sub(self.data, 84, -4)\nend\nif self.SPproA == \"0\" then\n\tself.SPProgramnameA = \"None\"\n\telseif self.SPProgramLabelA == \"\" then\n\tself.SPProgramnameA = \"Preset\"..self.SPproA\n\telseif self.SPProgramLabelA ~= \"\" then\n\tself.SPProgramnameA = self.SPProgramLabelA\nend\n",
+     "kind": "func",
+     "name": "Screen1PresetFromProgram",
+     "slotStyle": "leftNone;rightNone;triggerHidden"
+    },
+    {
+     "attKind": "standard",
+     "attReports": {
+      "0": "0.00"
+     },
+     "body": "self.SPProgramdisplayA = pixcCommon.execAttribute(0, self.SPProgramdisplayA, self.SPProgramnameA, doSet)\nreturn self.SPProgramdisplayA",
+     "kind": "func",
+     "name": "Screen1ProgramLabel",
+     "slotStyle": "leftNone;rightNone;triggerHidden"
+    },
+    {
+     "body": "if self.network == nil then return end\n\nself.network:send('{\"op\":\"get\",\"path\":\"DeviceObject/transition/$screen/@items/2/status/@props/transition\"}\\04')\nUtils.Timer.sleep(10)\nif self.data == nil then return end\nlocal tbar = string.sub(self.data, 89, -4)\nif tbar == \"UP\" then\n\tself.SPprogramB = \"UP\"\n\telseif tbar == \"DOWN\" then\n\tself.SPprogramB = \"DOWN\"\nend\nUtils.Timer.sleep(10)\nself.network:send('{\"op\":\"get\",\"path\":\"DeviceObject/$screen/@items/2/$preset/@items/' ..self.SPprogramB.. '/status/@props/memoryId\"}\\04')\nUtils.Timer.sleep(10)\nif self.SPprogramB == \"UP\" then\n\tself.SPproB = string.sub(self.data, 90, -3)\n\telseif self.SPprogramB == \"DOWN\" then\n\tself.SPproB = string.sub(self.data, 92, -3)\nend\nif self.SPproB ~= \"0\" then\n\tself.network:send('{\"op\":\"get\",\"path\":\"DeviceObject/preset/bank/$slot/@items/' ..self.SPproB.. '/control/@props/label\"}\\04')\nend\nUtils.Timer.sleep(10)\nlocal SPvalue = tonumber(self.SPproB)\nif SPvalue <= 9 then\n\tself.SPProgramLabelB = string.sub(self.data, 82, -4)\n\telseif SPvalue >= 10 and SPvalue <= 99 then\n\tself.SPProgramLabelB = string.sub(self.data, 83, -4)\n\telseif SPvalue >= 100 and SPvalue <= 999 then\n\tself.SPProgramLabelB = string.sub(self.data, 84, -4)\nend\nif self.SPproB == \"0\" then\n\tself.SPProgramnameB = \"None\"\n\telseif self.SPProgramLabelB == \"\" then\n\tself.SPProgramnameB = \"Preset\"..self.SPproB\n\telseif self.SPProgramLabelB ~= \"\" then\n\tself.SPProgramnameB = self.SPProgramLabelB\nend\n",
+     "kind": "func",
+     "name": "Screen2PresetFromProgram",
+     "slotStyle": "leftNone;rightNone;triggerHidden"
+    },
+    {
+     "attKind": "standard",
+     "attReports": {
+      "0": "0.00"
+     },
+     "body": "self.SPProgramdisplayB = pixcCommon.execAttribute(0, self.SPProgramdisplayB, self.SPProgramnameB, doSet)\nreturn self.SPProgramdisplayB",
+     "kind": "func",
+     "name": "Screen2ProgramLabel",
+     "slotStyle": "leftNone;rightNone;triggerHidden"
+    },
+    {
+     "body": "if self.network == nil then return end\n\nself.network:send('{\"op\":\"get\",\"path\":\"DeviceObject/transition/$auxiliaryScreen/@items/1/status/@props/transition\"}\\04')\nUtils.Timer.sleep(10)\nif self.data == nil then return end\nlocal tbar = string.sub(self.data, 98, -4)\nif tbar == \"UP\" then\n\tself.APprogramA = \"UP\"\n\telseif tbar == \"DOWN\" then\n\tself.APprogramA = \"DOWN\"\nend\nUtils.Timer.sleep(10)\nself.network:send('{\"op\":\"get\",\"path\":\"DeviceObject/$auxiliaryScreen/@items/1/$preset/@items/' ..self.APprogramA.. '/status/@props/memoryId\"}\\04')\nUtils.Timer.sleep(10)\nif self.APprogramA == \"UP\" then\n\tself.APproA = string.sub(self.data, 99, -3)\n\telseif self.APprogramA == \"DOWN\" then\n\tself.APproA = string.sub(self.data, 101, -3)\nend\nif self.APproA ~= \"0\" then\n\tself.network:send('{\"op\":\"get\",\"path\":\"DeviceObject/preset/auxBank/$slot/@items/' ..self.APproA.. '/control/@props/label\"}\\04')\nend\nUtils.Timer.sleep(10)\nlocal APvalue = tonumber(self.APproA)\nif APvalue <= 9 then\n\tself.APProgramLabelA = string.sub(self.data, 85, -4)\n\telseif APvalue >= 10 and APvalue <= 99 then\n\tself.APProgramLabelA = string.sub(self.data, 86, -4)\n\telseif APvalue >= 100 and APvalue <= 999 then\n\tself.APProgramLabelA = string.sub(self.data, 87, -4)\nend\nif self.APproA == \"0\" then\n\tself.APProgramnameA = \"None\"\n\telseif self.APProgramLabelA == \"\" then\n\tself.APProgramnameA = \"Preset\"..self.APproA\n\telseif self.APProgramLabelA ~= \"\" then\n\tself.APProgramnameA = self.APProgramLabelA\nend\n",
+     "kind": "func",
+     "name": "Auxiliary1PresetFromProgram",
+     "slotStyle": "leftNone;rightNone;triggerHidden"
+    },
+    {
+     "attKind": "standard",
+     "attReports": {
+      "0": "0.00"
+     },
+     "body": "self.APProgramdisplayA = pixcCommon.execAttribute(0, self.APProgramdisplayA, self.APProgramnameA, doSet)\nreturn self.APProgramdisplayA",
+     "kind": "func",
+     "name": "Auxiliary1ProgramLabel",
+     "slotStyle": "leftNone;rightNone;triggerHidden"
+    },
+    {
+     "body": "self.ForMonitorLabel.MasterPresetFromPreview()\r\nself.ForMonitorLabel.Screen1PresetFromPreview()\r\nself.ForMonitorLabel.Screen2PresetFromPreview()\r\nself.ForMonitorLabel.Auxiliary1PresetFromPreview()\r\nself.ForMonitorLabel.MasterPresetFromProgram()\r\nself.ForMonitorLabel.Screen1PresetFromProgram()\r\nself.ForMonitorLabel.Screen2PresetFromProgram()\r\nself.ForMonitorLabel.Auxiliary1PresetFromProgram()\r\n",
+     "kind": "func",
+     "name": "Refresh",
+     "slotStyle": "leftNone;rightNone"
+    }
+   ],
+   "kind": "ns",
+   "name": "ForMonitorLabel"
+  }
+ ],
+ "cjv": {
+  "h": 200.0,
+  "w": 200.0,
+  "x": 616.0,
+  "y": 340.0
+ },
+ "definedExternally": false,
+ "hostInfo": {
+  "systemType": ""
+ },
+ "libraryExportPath": "C:/ProgramData/AV Stumpfl/Pixera/control_library_user/Midra4KAWJProtocol.json",
+ "license": "1GNTlyr7sewU1l3S6nhV4lD6+TUTodBJiXoGyJGHKvhWnfoeffdraZ0UORJRFF2NXoAUmZvX8AMX+S3z8S4alO7x5tJDE5tO+z/lUR2fVXQRA3+R2C3ZaDyN1taJpxZ8HixVmVfq8k+hDtkWqUfBKQ==",
+ "name": "Midra4KAWJProtocol",
+ "properties": [
+  {
+   "cont": "192.168.2.140",
+   "name": "IP",
+   "typeHint": "string"
+  },
+  {
+   "cont": "10606",
+   "name": "Port",
+   "typeHint": "number"
+  },
+  {
+   "cont": "Yosuke Kikukawa",
+   "name": "Creator Name",
+   "readOnly": true
+  },
+  {
+   "cont": "1.2.0",
+   "name": "Version",
+   "readOnly": true
+  },
+  {
+   "cont": "29 Oct. 2021",
+   "name": "Data",
+   "readOnly": true
+  },
+  {
+   "cont": "false",
+   "name": "Auto init",
+   "typeHint": "bool"
+  }
+ ],
+ "separateCode": false,
+ "uiUrl": ""
+}
