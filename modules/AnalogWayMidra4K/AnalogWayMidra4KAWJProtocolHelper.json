@@ -1,0 +1,2345 @@
+{
+    "api": [
+     {
+      "elems": [
+       {
+        "attKind": "standard",
+        "attReports": {
+         "0": "0.00"
+        },
+        "body": "self.TBARdisplay = pixcCommon.execAttribute(0, self.TBARdisplay, val, doSet)\n-- The fader value is 0 to 65535\n\nUtils.Timer.sleep(100)\nif val == 0.00 then\n\tUtils.Timer.sleep(100)\n\tself.toTBAR.TbarStatus()\n\tUtils.Timer.sleep(10)\n\tAnalogWayMidra4KAWJProtocol.ForMonitorLabel.Refresh()\n\telseif val == 65535.00 then\n\tUtils.Timer.sleep(100)\n\tself.toTBAR.TbarStatus()\n\tUtils.Timer.sleep(10)\n\tAnalogWayMidra4KAWJProtocol.ForMonitorLabel.Refresh()\nend\n",
+        "kind": "func",
+        "name": "TBAR",
+        "params": [
+         {
+          "name": "val",
+          "type": "int"
+         }
+        ],
+        "slotStyle": "leftNone;rightOut;triggerHidden"
+       },
+       {
+        "attKind": "standard",
+        "attReports": {
+         "0": "DOWN"
+        },
+        "body": "if self.TBARdisplay == nil then return end\n\nif self.TBARdisplay == 0 then\n\tself.TBARstatus = \"DOWN\"\n\telseif self.TBARdisplay == 65535 then\n\tself.TBARstatus = \"UP\"\nend\n\nself.TBARSdisplay = pixcCommon.execAttribute(0, self.TBARSdisplay, self.TBARstatus, doSet)\nreturn self.TBARSdisplay",
+        "kind": "func",
+        "name": "TbarStatus",
+        "slotStyle": "leftNone;rightOut"
+       }
+      ],
+      "kind": "ns",
+      "name": "toTBAR"
+     },
+     {
+      "elems": [
+       {
+        "elems": [
+         {
+          "body": "self.MPTb = \"Program\"\npixc.callRefs(self.MPTb)",
+          "kind": "func",
+          "name": "Program",
+          "slotStyle": "leftIn;rightOut"
+         },
+         {
+          "body": "self.MPTa = \"Preview\"\npixc.callRefs(self.MPTa)",
+          "kind": "func",
+          "name": "Preview",
+          "slotStyle": "leftIn;rightOut"
+         }
+        ],
+        "kind": "ns",
+        "name": "Target"
+       },
+       {
+        "elems": [
+         {
+          "elems": [
+           {
+            "body": "self.MPMa = 1\npixc.callRefs(self.MPMa)",
+            "kind": "func",
+            "name": "Memory1",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMb = 2\npixc.callRefs(self.MPMb)",
+            "kind": "func",
+            "name": "Memory2",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMc = 3\npixc.callRefs(self.MPMc)",
+            "kind": "func",
+            "name": "Memory3",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMd = 4\npixc.callRefs(self.MPMd)",
+            "kind": "func",
+            "name": "Memory4",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMe = 5\npixc.callRefs(self.MPMe)",
+            "kind": "func",
+            "name": "Memory5",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMf = 6\npixc.callRefs(self.MPMf)",
+            "kind": "func",
+            "name": "Memory6",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMg = 7\npixc.callRefs(self.MPMg)",
+            "kind": "func",
+            "name": "Memory7",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMh = 8\npixc.callRefs(self.MPMh)",
+            "kind": "func",
+            "name": "Memory8",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMi = 9\npixc.callRefs(self.MPMi)",
+            "kind": "func",
+            "name": "Memory9",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMj = 10\npixc.callRefs(self.MPMj)",
+            "kind": "func",
+            "name": "Memory10",
+            "slotStyle": "leftIn;rightOut"
+           }
+          ],
+          "kind": "ns",
+          "name": "Memory1to10"
+         },
+         {
+          "elems": [
+           {
+            "body": "self.MPMk = 11\npixc.callRefs(self.MPMk)",
+            "kind": "func",
+            "name": "Memory11",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMl = 12\npixc.callRefs(self.MPMl)",
+            "kind": "func",
+            "name": "Memory12",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMm = 13\npixc.callRefs(self.MPMm)",
+            "kind": "func",
+            "name": "Memory13",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMn = 14\npixc.callRefs(self.MPMn)",
+            "kind": "func",
+            "name": "Memory14",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMo = 15\npixc.callRefs(self.MPMo)",
+            "kind": "func",
+            "name": "Memory15",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMp = 16\npixc.callRefs(self.MPMp)",
+            "kind": "func",
+            "name": "Memory16",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMq = 17\npixc.callRefs(self.MPMq)",
+            "kind": "func",
+            "name": "Memory17",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMr = 18\npixc.callRefs(self.MPMr)",
+            "kind": "func",
+            "name": "Memory18",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMs = 19\npixc.callRefs(self.MPMs)",
+            "kind": "func",
+            "name": "Memory19",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMt = 20\npixc.callRefs(self.MPMt)",
+            "kind": "func",
+            "name": "Memory20",
+            "slotStyle": "leftIn;rightOut"
+           }
+          ],
+          "kind": "ns",
+          "name": "Memory11to20"
+         },
+         {
+          "elems": [
+           {
+            "body": "self.MPMu = 21\npixc.callRefs(self.MPMu)",
+            "kind": "func",
+            "name": "Memory21",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMv = 22\npixc.callRefs(self.MPMv)",
+            "kind": "func",
+            "name": "Memory22",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMw = 23\npixc.callRefs(self.MPMw)",
+            "kind": "func",
+            "name": "Memory23",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMx = 24\npixc.callRefs(self.MPMx)",
+            "kind": "func",
+            "name": "Memory24",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMy = 25\npixc.callRefs(self.MPMy)",
+            "kind": "func",
+            "name": "Memory25",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMz = 26\npixc.callRefs(self.MPMz)",
+            "kind": "func",
+            "name": "Memory26",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMaa = 27\npixc.callRefs(self.MPMaa)",
+            "kind": "func",
+            "name": "Memory27",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMab = 28\npixc.callRefs(self.MPMab)",
+            "kind": "func",
+            "name": "Memory28",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMac = 29\npixc.callRefs(self.MPMac)",
+            "kind": "func",
+            "name": "Memory29",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMad = 30\npixc.callRefs(self.MPMad)",
+            "kind": "func",
+            "name": "Memory30",
+            "slotStyle": "leftIn;rightOut"
+           }
+          ],
+          "kind": "ns",
+          "name": "Memory21to30"
+         },
+         {
+          "elems": [
+           {
+            "body": "self.MPMae = 31\npixc.callRefs(self.MPMae)",
+            "kind": "func",
+            "name": "Memory31",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMaf = 32\npixc.callRefs(self.MPMaf)",
+            "kind": "func",
+            "name": "Memory32",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMag = 33\npixc.callRefs(self.MPMag)",
+            "kind": "func",
+            "name": "Memory33",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMah = 34\npixc.callRefs(self.MPMah)",
+            "kind": "func",
+            "name": "Memory34",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMai = 35\npixc.callRefs(self.MPMai)",
+            "kind": "func",
+            "name": "Memory35",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMaj = 36\npixc.callRefs(self.MPMaj)",
+            "kind": "func",
+            "name": "Memory36",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMak = 37\npixc.callRefs(self.MPMak)",
+            "kind": "func",
+            "name": "Memory37",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMal = 38\npixc.callRefs(self.MPMal)",
+            "kind": "func",
+            "name": "Memory38",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMam = 39\npixc.callRefs(self.MPMam)",
+            "kind": "func",
+            "name": "Memory39",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMan = 40\npixc.callRefs(self.MPMan)",
+            "kind": "func",
+            "name": "Memory40",
+            "slotStyle": "leftIn;rightOut"
+           }
+          ],
+          "kind": "ns",
+          "name": "Memory31to40"
+         },
+         {
+          "elems": [
+           {
+            "body": "self.MPMao = 41\npixc.callRefs(self.MPMao)",
+            "kind": "func",
+            "name": "Memory41",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMap = 42\npixc.callRefs(self.MPMap)",
+            "kind": "func",
+            "name": "Memory42",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMaq = 43\npixc.callRefs(self.MPMaq)",
+            "kind": "func",
+            "name": "Memory43",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMar = 44\npixc.callRefs(self.MPMar)",
+            "kind": "func",
+            "name": "Memory44",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMas = 45\npixc.callRefs(self.MPMas)",
+            "kind": "func",
+            "name": "Memory45",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMat = 46\npixc.callRefs(self.MPMat)",
+            "kind": "func",
+            "name": "Memory46",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMau = 47\npixc.callRefs(self.MPMau)",
+            "kind": "func",
+            "name": "Memory47",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMav = 48\npixc.callRefs(self.MPMav)",
+            "kind": "func",
+            "name": "Memory48",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMaw = 49\npixc.callRefs(self.MPMaw)",
+            "kind": "func",
+            "name": "Memory49",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMax = 50\npixc.callRefs(self.MPMax)",
+            "kind": "func",
+            "name": "Memory50",
+            "slotStyle": "leftIn;rightOut"
+           }
+          ],
+          "kind": "ns",
+          "name": "Memory41to50"
+         },
+         {
+          "elems": [
+           {
+            "body": "self.MPMay = 51\r\npixc.callRefs(self.MPMay)",
+            "kind": "func",
+            "name": "Memory51",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMaz = 52\r\npixc.callRefs(self.MPMaz)",
+            "kind": "func",
+            "name": "Memory52",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMba = 53\r\npixc.callRefs(self.MPMba)",
+            "kind": "func",
+            "name": "Memory53",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMbb = 54\r\npixc.callRefs(self.MPMbb)",
+            "kind": "func",
+            "name": "Memory54",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMbc = 55\r\npixc.callRefs(self.MPMbc)",
+            "kind": "func",
+            "name": "Memory55",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMbd = 56\r\npixc.callRefs(self.MPMbd)",
+            "kind": "func",
+            "name": "Memory56",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMbe = 57\r\npixc.callRefs(self.MPMbe)",
+            "kind": "func",
+            "name": "Memory57",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMbf = 58\r\npixc.callRefs(self.MPMbf)",
+            "kind": "func",
+            "name": "Memory58",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMbg = 59\r\npixc.callRefs(self.MPMbg)",
+            "kind": "func",
+            "name": "Memory59",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMbh = 60\r\npixc.callRefs(self.MPMbh)",
+            "kind": "func",
+            "name": "Memory60",
+            "slotStyle": "leftIn;rightOut"
+           }
+          ],
+          "kind": "ns",
+          "name": "Memory51to60"
+         },
+         {
+          "elems": [
+           {
+            "body": "self.MPMbi = 61\r\npixc.callRefs(self.MPMbi)",
+            "kind": "func",
+            "name": "Memory61",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMbj = 62\r\npixc.callRefs(self.MPMbj)",
+            "kind": "func",
+            "name": "Memory62",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMbk = 63\r\npixc.callRefs(self.MPMbk)",
+            "kind": "func",
+            "name": "Memory63",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMbl = 64\r\npixc.callRefs(self.MPMbl)",
+            "kind": "func",
+            "name": "Memory64",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMbm = 65\r\npixc.callRefs(self.MPMbm)",
+            "kind": "func",
+            "name": "Memory65",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMbn = 66\r\npixc.callRefs(self.MPMbn)",
+            "kind": "func",
+            "name": "Memory66",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMbo = 67\r\npixc.callRefs(self.MPMbo)",
+            "kind": "func",
+            "name": "Memory67",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMbp = 68\r\npixc.callRefs(self.MPMbp)",
+            "kind": "func",
+            "name": "Memory68",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMbq = 69\r\npixc.callRefs(self.MPMbq)",
+            "kind": "func",
+            "name": "Memory69",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMbr = 70\r\npixc.callRefs(self.MPMbr)",
+            "kind": "func",
+            "name": "Memory70",
+            "slotStyle": "leftIn;rightOut"
+           }
+          ],
+          "kind": "ns",
+          "name": "Memory61to70"
+         },
+         {
+          "elems": [
+           {
+            "body": "self.MPMbs = 71\r\npixc.callRefs(self.MPMbs)",
+            "kind": "func",
+            "name": "Memory71",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMbt = 72\r\npixc.callRefs(self.MPMbt)",
+            "kind": "func",
+            "name": "Memory72",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMbu = 73\r\npixc.callRefs(self.MPMbu)",
+            "kind": "func",
+            "name": "Memory73",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMbv = 74\r\npixc.callRefs(self.MPMbv)",
+            "kind": "func",
+            "name": "Memory74",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMbw = 75\r\npixc.callRefs(self.MPMbw)",
+            "kind": "func",
+            "name": "Memory75",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMbx = 76\r\npixc.callRefs(self.MPMbx)",
+            "kind": "func",
+            "name": "Memory76",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMby = 77\r\npixc.callRefs(self.MPMby)",
+            "kind": "func",
+            "name": "Memory77",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMbz = 78\r\npixc.callRefs(self.MPMbz)",
+            "kind": "func",
+            "name": "Memory78",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMca = 79\r\npixc.callRefs(self.MPMca)",
+            "kind": "func",
+            "name": "Memory79",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMcb = 80\r\npixc.callRefs(self.MPMcb)",
+            "kind": "func",
+            "name": "Memory80",
+            "slotStyle": "leftIn;rightOut"
+           }
+          ],
+          "kind": "ns",
+          "name": "Memory71to80"
+         },
+         {
+          "elems": [
+           {
+            "body": "self.MPMcd = 81\r\npixc.callRefs(self.MPMcd)",
+            "kind": "func",
+            "name": "Memory81",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMce = 82\r\npixc.callRefs(self.MPMce)",
+            "kind": "func",
+            "name": "Memory82",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMcf = 83\r\npixc.callRefs(self.MPMcf)",
+            "kind": "func",
+            "name": "Memory83",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMcg = 84\r\npixc.callRefs(self.MPMcg)",
+            "kind": "func",
+            "name": "Memory84",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMch = 85\r\npixc.callRefs(self.MPMch)",
+            "kind": "func",
+            "name": "Memory85",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMci = 86\r\npixc.callRefs(self.MPMci)",
+            "kind": "func",
+            "name": "Memory86",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMcj = 87\r\npixc.callRefs(self.MPMcj)",
+            "kind": "func",
+            "name": "Memory87",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMck = 88\r\npixc.callRefs(self.MPMck)",
+            "kind": "func",
+            "name": "Memory88",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMcl = 89\r\npixc.callRefs(self.MPMcl)",
+            "kind": "func",
+            "name": "Memory89",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMcm = 90\r\npixc.callRefs(self.MPMcm)",
+            "kind": "func",
+            "name": "Memory90",
+            "slotStyle": "leftIn;rightOut"
+           }
+          ],
+          "kind": "ns",
+          "name": "Memory81to90"
+         },
+         {
+          "elems": [
+           {
+            "body": "self.MPMcn = 91\r\npixc.callRefs(self.MPMcn)",
+            "kind": "func",
+            "name": "Memory91",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMco = 92\r\npixc.callRefs(self.MPMco)",
+            "kind": "func",
+            "name": "Memory92",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMcp = 93\r\npixc.callRefs(self.MPMcp)",
+            "kind": "func",
+            "name": "Memory93",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMcq = 94\r\npixc.callRefs(self.MPMcq)",
+            "kind": "func",
+            "name": "Memory94",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMcr = 95\r\npixc.callRefs(self.MPMcr)",
+            "kind": "func",
+            "name": "Memory95",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMcs = 96\r\npixc.callRefs(self.MPMcs)",
+            "kind": "func",
+            "name": "Memory96",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMct = 97\r\npixc.callRefs(self.MPMct)",
+            "kind": "func",
+            "name": "Memory97",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMcu = 98\r\npixc.callRefs(self.MPMcu)",
+            "kind": "func",
+            "name": "Memory98",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMcv = 99\r\npixc.callRefs(self.MPMcv)",
+            "kind": "func",
+            "name": "Memory99",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.MPMcw = 100\r\npixc.callRefs(self.MPMcw)",
+            "kind": "func",
+            "name": "Memory100",
+            "slotStyle": "leftIn;rightOut"
+           }
+          ],
+          "kind": "ns",
+          "name": "Memory91to100"
+         }
+        ],
+        "kind": "ns",
+        "name": "MemoryID"
+       }
+      ],
+      "kind": "ns",
+      "name": "toRecallingMasterPreset"
+     },
+     {
+      "elems": [
+       {
+        "elems": [
+         {
+          "body": "self.SPTb = \"Program\"\npixc.callRefs(self.SPTb)",
+          "kind": "func",
+          "name": "Program",
+          "slotStyle": "leftIn;rightOut"
+         },
+         {
+          "body": "self.SPTa = \"Preview\"\npixc.callRefs(self.SPTa)",
+          "kind": "func",
+          "name": "Preview",
+          "slotStyle": "leftIn;rightOut"
+         }
+        ],
+        "kind": "ns",
+        "name": "Target"
+       },
+       {
+        "elems": [
+         {
+          "body": "self.SPSAa = \"Screen1\"\npixc.callRefs(self.SPSAa)",
+          "kind": "func",
+          "name": "Screen1",
+          "slotStyle": "leftIn;rightOut"
+         },
+         {
+          "body": "self.SPSAb = \"Screen2\"\npixc.callRefs(self.SPSAb)",
+          "kind": "func",
+          "name": "Screen2",
+          "slotStyle": "leftIn;rightOut"
+         },
+         {
+          "body": "self.SPSAc = \"Auxiliary1\"\npixc.callRefs(self.SPSAc)",
+          "kind": "func",
+          "name": "Auxiliary1",
+          "slotStyle": "leftIn;rightOut"
+         }
+        ],
+        "kind": "ns",
+        "name": "ScreenAuxID"
+       },
+       {
+        "elems": [
+         {
+          "elems": [
+           {
+            "body": "self.SPMa = 1\npixc.callRefs(self.SPMa)",
+            "kind": "func",
+            "name": "Memory1",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMb = 2\npixc.callRefs(self.SPMb)",
+            "kind": "func",
+            "name": "Memory2",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMc = 3\npixc.callRefs(self.SPMc)",
+            "kind": "func",
+            "name": "Memory3",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMd = 4\npixc.callRefs(self.SPMd)",
+            "kind": "func",
+            "name": "Memory4",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMe = 5\npixc.callRefs(self.SPMe)",
+            "kind": "func",
+            "name": "Memory5",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMf = 6\npixc.callRefs(self.SPMf)",
+            "kind": "func",
+            "name": "Memory6",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMg = 7\npixc.callRefs(self.SPMg)",
+            "kind": "func",
+            "name": "Memory7",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMh = 8\npixc.callRefs(self.SPMh)",
+            "kind": "func",
+            "name": "Memory8",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMi = 9\npixc.callRefs(self.SPMi)",
+            "kind": "func",
+            "name": "Memory9",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMj = 10\npixc.callRefs(self.SPMj)",
+            "kind": "func",
+            "name": "Memory10",
+            "slotStyle": "leftIn;rightOut"
+           }
+          ],
+          "kind": "ns",
+          "name": "Memory1to10"
+         },
+         {
+          "elems": [
+           {
+            "body": "self.SPMk = 11\npixc.callRefs(self.SPMk)",
+            "kind": "func",
+            "name": "Memory11",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMl = 12\npixc.callRefs(self.SPMl)",
+            "kind": "func",
+            "name": "Memory12",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMm = 13\npixc.callRefs(self.SPMm)",
+            "kind": "func",
+            "name": "Memory13",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMn = 14\npixc.callRefs(self.SPMn)",
+            "kind": "func",
+            "name": "Memory14",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMo = 15\npixc.callRefs(self.SPMo)",
+            "kind": "func",
+            "name": "Memory15",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMp = 16\npixc.callRefs(self.SPMp)",
+            "kind": "func",
+            "name": "Memory16",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMq = 17\npixc.callRefs(self.SPMq)",
+            "kind": "func",
+            "name": "Memory17",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMr = 18\npixc.callRefs(self.SPMr)",
+            "kind": "func",
+            "name": "Memory18",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMs = 19\npixc.callRefs(self.SPMs)",
+            "kind": "func",
+            "name": "Memory19",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMt = 20\npixc.callRefs(self.SPMt)",
+            "kind": "func",
+            "name": "Memory20",
+            "slotStyle": "leftIn;rightOut"
+           }
+          ],
+          "kind": "ns",
+          "name": "Memory11to20"
+         },
+         {
+          "elems": [
+           {
+            "body": "self.SPMu = 21\npixc.callRefs(self.SPMu)",
+            "kind": "func",
+            "name": "Memory21",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMv = 22\npixc.callRefs(self.SPMv)",
+            "kind": "func",
+            "name": "Memory22",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMw = 23\npixc.callRefs(self.SPMw)",
+            "kind": "func",
+            "name": "Memory23",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMx = 24\npixc.callRefs(self.SPMx)",
+            "kind": "func",
+            "name": "Memory24",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMy = 25\npixc.callRefs(self.SPMy)",
+            "kind": "func",
+            "name": "Memory25",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMz = 26\npixc.callRefs(self.SPMz)",
+            "kind": "func",
+            "name": "Memory26",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMaa = 27\npixc.callRefs(self.SPMaa)",
+            "kind": "func",
+            "name": "Memory27",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMab = 28\npixc.callRefs(self.SPMab)",
+            "kind": "func",
+            "name": "Memory28",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMac = 29\npixc.callRefs(self.SPMac)",
+            "kind": "func",
+            "name": "Memory29",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMad = 30\npixc.callRefs(self.SPMad)",
+            "kind": "func",
+            "name": "Memory30",
+            "slotStyle": "leftIn;rightOut"
+           }
+          ],
+          "kind": "ns",
+          "name": "Memory21to30"
+         },
+         {
+          "elems": [
+           {
+            "body": "self.SPMae = 31\npixc.callRefs(self.SPMae)",
+            "kind": "func",
+            "name": "Memory31",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMaf = 32\npixc.callRefs(self.SPMaf)",
+            "kind": "func",
+            "name": "Memory32",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMag = 33\npixc.callRefs(self.SPMag)",
+            "kind": "func",
+            "name": "Memory33",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMah = 34\npixc.callRefs(self.SPMah)",
+            "kind": "func",
+            "name": "Memory34",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMai = 35\npixc.callRefs(self.SPMai)",
+            "kind": "func",
+            "name": "Memory35",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMaj = 36\npixc.callRefs(self.SPMaj)",
+            "kind": "func",
+            "name": "Memory36",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMak = 37\npixc.callRefs(self.SPMak)",
+            "kind": "func",
+            "name": "Memory37",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMal = 38\npixc.callRefs(self.SPMal)",
+            "kind": "func",
+            "name": "Memory38",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMam = 39\npixc.callRefs(self.SPMam)",
+            "kind": "func",
+            "name": "Memory39",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMan = 40\npixc.callRefs(self.SPMan)",
+            "kind": "func",
+            "name": "Memory40",
+            "slotStyle": "leftIn;rightOut"
+           }
+          ],
+          "kind": "ns",
+          "name": "Memory31to40"
+         },
+         {
+          "elems": [
+           {
+            "body": "self.SPMao = 41\npixc.callRefs(self.SPMao)",
+            "kind": "func",
+            "name": "Memoru41",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMap = 42\npixc.callRefs(self.SPMap)",
+            "kind": "func",
+            "name": "Memory42",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMaq = 43\npixc.callRefs(self.SPMaq)",
+            "kind": "func",
+            "name": "Memory43",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMar = 44\npixc.callRefs(self.SPMar)",
+            "kind": "func",
+            "name": "Memory44",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMas = 45\npixc.callRefs(self.SPMas)",
+            "kind": "func",
+            "name": "Memory45",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMat = 46\npixc.callRefs(self.SPMat)",
+            "kind": "func",
+            "name": "Memory46",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMau = 47\npixc.callRefs(self.SPMau)",
+            "kind": "func",
+            "name": "Memory47",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMav = 48\npixc.callRefs(self.SPMav)",
+            "kind": "func",
+            "name": "Memory48",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMaw = 49\npixc.callRefs(self.SPMaw)",
+            "kind": "func",
+            "name": "Memory49",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMax = 50\npixc.callRefs(self.SPMax)",
+            "kind": "func",
+            "name": "Memory50",
+            "slotStyle": "leftIn;rightOut"
+           }
+          ],
+          "kind": "ns",
+          "name": "Memory41to50"
+         },
+         {
+          "elems": [
+           {
+            "body": "self.SPMay = 51\npixc.callRefs(self.SPMay)",
+            "kind": "func",
+            "name": "Memory51",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMaz = 52\npixc.callRefs(self.SPMaz)",
+            "kind": "func",
+            "name": "Memory52",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMba = 53\npixc.callRefs(self.SPMba)",
+            "kind": "func",
+            "name": "Memory53",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMbb = 54\npixc.callRefs(self.SPMbb)",
+            "kind": "func",
+            "name": "Memory54",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMbc = 55\npixc.callRefs(self.SPMbc)",
+            "kind": "func",
+            "name": "Memory55",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMbd = 56\npixc.callRefs(self.SPMbd)",
+            "kind": "func",
+            "name": "Memory56",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMbe = 57\npixc.callRefs(self.SPMbe)",
+            "kind": "func",
+            "name": "Memory57",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMbf = 58\npixc.callRefs(self.SPMbf)",
+            "kind": "func",
+            "name": "Memory58",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMbg = 59\npixc.callRefs(self.SPMbg)",
+            "kind": "func",
+            "name": "Memory59",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMbh = 60\npixc.callRefs(self.SPMbh)",
+            "kind": "func",
+            "name": "Memory60",
+            "slotStyle": "leftIn;rightOut"
+           }
+          ],
+          "kind": "ns",
+          "name": "Memory51to60"
+         },
+         {
+          "elems": [
+           {
+            "body": "self.SPMbi = 61\npixc.callRefs(self.SPMbi)",
+            "kind": "func",
+            "name": "Memory61",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMbj = 62\npixc.callRefs(self.SPMbj)",
+            "kind": "func",
+            "name": "Memory62",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMbk = 63\npixc.callRefs(self.SPMbk)",
+            "kind": "func",
+            "name": "Memory63",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMbl = 64\npixc.callRefs(self.SPMbl)",
+            "kind": "func",
+            "name": "Memory64",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMbm = 65\npixc.callRefs(self.SPMbm)",
+            "kind": "func",
+            "name": "Memory65",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMbn = 66\npixc.callRefs(self.SPMbn)",
+            "kind": "func",
+            "name": "Memory66",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMbo = 67\npixc.callRefs(self.SPMbo)",
+            "kind": "func",
+            "name": "Memory67",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMbp = 68\npixc.callRefs(self.SPMbp)",
+            "kind": "func",
+            "name": "Memory68",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMbq = 69\npixc.callRefs(self.SPMbq)",
+            "kind": "func",
+            "name": "Memory69",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMbr = 70\npixc.callRefs(self.SPMbr)",
+            "kind": "func",
+            "name": "Memory70",
+            "slotStyle": "leftIn;rightOut"
+           }
+          ],
+          "kind": "ns",
+          "name": "Memory61to70"
+         },
+         {
+          "elems": [
+           {
+            "body": "self.SPMbs = 71\npixc.callRefs(self.SPMbs)",
+            "kind": "func",
+            "name": "Memory71",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMbt = 72\npixc.callRefs(self.SPMbt)",
+            "kind": "func",
+            "name": "Memory72",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMbu = 73\npixc.callRefs(self.SPMbu)",
+            "kind": "func",
+            "name": "Memory73",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMbv = 74\npixc.callRefs(self.SPMbv)",
+            "kind": "func",
+            "name": "Memory74",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMbw = 75\npixc.callRefs(self.SPMbw)",
+            "kind": "func",
+            "name": "Memory75",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMbx = 76\npixc.callRefs(self.SPMbx)",
+            "kind": "func",
+            "name": "Memory76",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMby = 77\npixc.callRefs(self.SPMby)",
+            "kind": "func",
+            "name": "Memory77",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMbz = 78\npixc.callRefs(self.SPMbz)",
+            "kind": "func",
+            "name": "Memory78",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMca = 79\npixc.callRefs(self.SPMca)",
+            "kind": "func",
+            "name": "Memory79",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMcb = 80\npixc.callRefs(self.SPMcb)",
+            "kind": "func",
+            "name": "Memory80",
+            "slotStyle": "leftIn;rightOut"
+           }
+          ],
+          "kind": "ns",
+          "name": "Memory71to80"
+         },
+         {
+          "elems": [
+           {
+            "body": "self.SPMcc = 81\npixc.callRefs(self.SPMcc)",
+            "kind": "func",
+            "name": "Memory81",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMcd = 82\npixc.callRefs(self.SPMcd)",
+            "kind": "func",
+            "name": "Memory82",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMce = 83\npixc.callRefs(self.SPMce)",
+            "kind": "func",
+            "name": "Memory83",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMcf = 84\npixc.callRefs(self.SPMcf)",
+            "kind": "func",
+            "name": "Memory84",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMcg = 85\npixc.callRefs(self.SPMcg)",
+            "kind": "func",
+            "name": "Memory85",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMch = 86\npixc.callRefs(self.SPMch)",
+            "kind": "func",
+            "name": "Memory86",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMci = 87\npixc.callRefs(self.SPMci)",
+            "kind": "func",
+            "name": "Memory87",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMcj = 88\npixc.callRefs(self.SPMcj)",
+            "kind": "func",
+            "name": "Memory88",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMck = 89\npixc.callRefs(self.SPMck)",
+            "kind": "func",
+            "name": "Memory89",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMcl = 90\npixc.callRefs(self.SPMcl)",
+            "kind": "func",
+            "name": "Memory90",
+            "slotStyle": "leftIn;rightOut"
+           }
+          ],
+          "kind": "ns",
+          "name": "Memory81to90"
+         },
+         {
+          "elems": [
+           {
+            "body": "self.SPMcm = 91\npixc.callRefs(self.SPMcm)",
+            "kind": "func",
+            "name": "Memory91",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMcn = 92\npixc.callRefs(self.SPMcn)",
+            "kind": "func",
+            "name": "Memory92",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMco = 93\npixc.callRefs(self.SPMco)",
+            "kind": "func",
+            "name": "Memory93",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMcp = 94\npixc.callRefs(self.SPMcp)",
+            "kind": "func",
+            "name": "Memory94",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMcq = 95\npixc.callRefs(self.SPMcq)",
+            "kind": "func",
+            "name": "Memory95",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMcr = 96\npixc.callRefs(self.SPMcr)",
+            "kind": "func",
+            "name": "Memory96",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMcs = 97\npixc.callRefs(self.SPMcs)",
+            "kind": "func",
+            "name": "Memory97",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMct = 98\npixc.callRefs(self.SPMct)",
+            "kind": "func",
+            "name": "Memory98",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMcu = 99\npixc.callRefs(self.SPMcu)",
+            "kind": "func",
+            "name": "Memory99",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.SPMcv = 100\npixc.callRefs(self.SPMcv)",
+            "kind": "func",
+            "name": "Memory100",
+            "slotStyle": "leftIn;rightOut"
+           }
+          ],
+          "kind": "ns",
+          "name": "Memory91to100"
+         }
+        ],
+        "kind": "ns",
+        "name": "MemoryID"
+       }
+      ],
+      "kind": "ns",
+      "name": "toRecallingScreenPreset"
+     },
+     {
+      "elems": [
+       {
+        "elems": [
+         {
+          "body": "self.LSTb = \"Program\"\npixc.callRefs(self.LSTb)",
+          "kind": "func",
+          "name": "Program",
+          "slotStyle": "leftIn;rightOut"
+         },
+         {
+          "body": "self.LSTa = \"Preview\"\npixc.callRefs(self.LSTa)",
+          "kind": "func",
+          "name": "Preview",
+          "slotStyle": "leftIn;rightOut"
+         }
+        ],
+        "kind": "ns",
+        "name": "Target"
+       },
+       {
+        "elems": [
+         {
+          "body": "self.LSSAa = \"Screen1\"\npixc.callRefs(self.LSSAa)",
+          "kind": "func",
+          "name": "Screen1",
+          "slotStyle": "leftIn;rightOut"
+         },
+         {
+          "body": "self.LSSAb = \"Screen2\"\npixc.callRefs(self.LSSAb)",
+          "kind": "func",
+          "name": "Screen2",
+          "slotStyle": "leftIn;rightOut"
+         },
+         {
+          "body": "self.LSSAc = \"Auxiliary1\"\npixc.callRefs(self.LSSAc)",
+          "kind": "func",
+          "name": "Auxiliary1",
+          "slotStyle": "leftIn;rightOut"
+         }
+        ],
+        "kind": "ns",
+        "name": "ScreenAuxID"
+       },
+       {
+        "elems": [
+         {
+          "body": "self.LSLa = \"Background\"\npixc.callRefs(self.LSLa)",
+          "kind": "func",
+          "name": "Background",
+          "slotStyle": "leftIn;rightOut"
+         },
+         {
+          "body": "self.LSLb = \"Layer1\"\npixc.callRefs(self.LSLb)",
+          "kind": "func",
+          "name": "Layer1",
+          "slotStyle": "leftIn;rightOut"
+         },
+         {
+          "body": "self.LSLc = \"Layer2\"\npixc.callRefs(self.LSLc)",
+          "kind": "func",
+          "name": "Layer2",
+          "slotStyle": "leftIn;rightOut"
+         },
+         {
+          "body": "self.LSLd = \"Layer3\"\npixc.callRefs(self.LSLd)",
+          "kind": "func",
+          "name": "Layer3",
+          "slotStyle": "leftIn;rightOut"
+         },
+         {
+          "body": "self.LSLe = \"Layer4\"\npixc.callRefs(self.LSLe)",
+          "kind": "func",
+          "name": "Layer4",
+          "slotStyle": "leftIn;rightOut"
+         },
+         {
+          "body": "self.LSLf = \"Foreground\"\npixc.callRefs(self.LSLf)",
+          "kind": "func",
+          "name": "Foreground",
+          "slotStyle": "leftIn;rightOut"
+         }
+        ],
+        "kind": "ns",
+        "name": "LayerID"
+       },
+       {
+        "elems": [
+         {
+          "body": "self.LSSIDa = 1\npixc.callRefs(self.LSSIDa)",
+          "kind": "func",
+          "name": "Source1",
+          "slotStyle": "leftIn;rightOut"
+         },
+         {
+          "body": "self.LSSIDb = 2\npixc.callRefs(self.LSSIDb)",
+          "kind": "func",
+          "name": "Source2",
+          "slotStyle": "leftIn;rightOut"
+         },
+         {
+          "body": "self.LSSIDc = 3\npixc.callRefs(self.LSSIDc)",
+          "kind": "func",
+          "name": "Source3",
+          "slotStyle": "leftIn;rightOut"
+         },
+         {
+          "body": "self.LSSIDd = 4\npixc.callRefs(self.LSSIDd)",
+          "kind": "func",
+          "name": "Source4",
+          "slotStyle": "leftIn;rightOut"
+         },
+         {
+          "body": "self.LSSIDe = 5\npixc.callRefs(self.LSSIDe)",
+          "kind": "func",
+          "name": "Source5",
+          "slotStyle": "leftIn;rightOut"
+         },
+         {
+          "body": "self.LSSIDf = 6\npixc.callRefs(self.LSSIDf)",
+          "kind": "func",
+          "name": "Source6",
+          "slotStyle": "leftIn;rightOut"
+         },
+         {
+          "body": "self.LSSIDg = 7\npixc.callRefs(self.LSSIDg)",
+          "kind": "func",
+          "name": "Source7",
+          "slotStyle": "leftIn;rightOut"
+         },
+         {
+          "body": "self.LSSIDh = 8\npixc.callRefs(self.LSSIDh)",
+          "kind": "func",
+          "name": "Source8",
+          "slotStyle": "leftIn;rightOut"
+         },
+         {
+          "body": "self.LSSIDi = 9\npixc.callRefs(self.LSSIDi)",
+          "kind": "func",
+          "name": "Source9",
+          "slotStyle": "leftIn;rightOut"
+         },
+         {
+          "body": "self.LSSIDj = 10\npixc.callRefs(self.LSSIDj)",
+          "kind": "func",
+          "name": "Source10",
+          "slotStyle": "leftIn;rightOut"
+         }
+        ],
+        "kind": "ns",
+        "name": "SourceID"
+       }
+      ],
+      "kind": "ns",
+      "name": "toChangeLayerSource"
+     },
+     {
+      "elems": [
+       {
+        "elems": [
+         {
+          "body": "self.ISSIDa = 1\npixc.callRefs(self.ISSIDa)",
+          "kind": "func",
+          "name": "Screen1",
+          "slotStyle": "leftIn;rightOut"
+         },
+         {
+          "body": "self.ISSIDb = 2\npixc.callRefs(self.ISSIDb)",
+          "kind": "func",
+          "name": "Screen2",
+          "slotStyle": "leftIn;rightOut"
+         }
+        ],
+        "kind": "ns",
+        "name": "ScreenID"
+       },
+       {
+        "elems": [
+         {
+          "body": "self.ISFBTa = \"Foreground\"\npixc.callRefs(self.ISFBTa)",
+          "kind": "func",
+          "name": "Foreground",
+          "slotStyle": "leftIn;rightOut"
+         },
+         {
+          "body": "self.ISFBTb = \"Background\"\npixc.callRefs(self.ISFBTb)",
+          "kind": "func",
+          "name": "Background",
+          "slotStyle": "leftIn;rightOut"
+         }
+        ],
+        "kind": "ns",
+        "name": "ForeBackTarget"
+       },
+       {
+        "elems": [
+         {
+          "body": "self.ISSlotIDa = 1\npixc.callRefs(self.ISSlotIDa)",
+          "kind": "func",
+          "name": "ImageSlot1",
+          "slotStyle": "leftIn;rightOut"
+         },
+         {
+          "body": "self.ISSlotIDb = 2\npixc.callRefs(self.ISSlotIDb)",
+          "kind": "func",
+          "name": "ImageSlot2",
+          "slotStyle": "leftIn;rightOut"
+         },
+         {
+          "body": "self.ISSlotIDc = 3\npixc.callRefs(self.ISSlotIDc)",
+          "kind": "func",
+          "name": "ImageSlot3",
+          "slotStyle": "leftIn;rightOut"
+         },
+         {
+          "body": "self.ISSlotIDd = 4\npixc.callRefs(self.ISSlotIDd)",
+          "kind": "func",
+          "name": "ImageSlot4",
+          "slotStyle": "leftIn;rightOut"
+         }
+        ],
+        "kind": "ns",
+        "name": "SlotID"
+       },
+       {
+        "elems": [
+         {
+          "elems": [
+           {
+            "body": "self.ISLibraryA = 1\npixc.callRefs(self.ISLibraryA)",
+            "kind": "func",
+            "name": "Library1",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.ISLibraryB = 2\npixc.callRefs(self.ISLibraryB)",
+            "kind": "func",
+            "name": "Library2",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.ISLibraryC = 3\npixc.callRefs(self.ISLibraryC)",
+            "kind": "func",
+            "name": "Library3",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.ISLibraryD = 4\npixc.callRefs(self.ISLibraryD)",
+            "kind": "func",
+            "name": "Library4",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.ISLibraryE = 5\npixc.callRefs(self.ISLibraryE)",
+            "kind": "func",
+            "name": "Library5",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.ISLibraryF = 6\npixc.callRefs(self.ISLibraryF)",
+            "kind": "func",
+            "name": "Library6",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.ISLibraryG = 7\npixc.callRefs(self.ISLibraryG)",
+            "kind": "func",
+            "name": "Library7",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.ISLibraryH = 8\npixc.callRefs(self.ISLibraryH)",
+            "kind": "func",
+            "name": "Library8",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.ISLibraryI = 9\npixc.callRefs(self.ISLibraryI)",
+            "kind": "func",
+            "name": "Library9",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.ISLibraryJ = 10\npixc.callRefs(self.ISLibraryJ)",
+            "kind": "func",
+            "name": "Library10",
+            "slotStyle": "leftIn;rightOut"
+           }
+          ],
+          "kind": "ns",
+          "name": "Library1to10"
+         },
+         {
+          "elems": [
+           {
+            "body": "self.ISLibraryK = 11\npixc.callRefs(self.ISLibraryK)",
+            "kind": "func",
+            "name": "Library11",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.ISLibraryL = 12\npixc.callRefs(self.ISLibraryL)",
+            "kind": "func",
+            "name": "Library12",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.ISLibraryM = 13\npixc.callRefs(self.ISLibraryM)",
+            "kind": "func",
+            "name": "Library13",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.ISLibraryN = 14\npixc.callRefs(self.ISLibraryN)",
+            "kind": "func",
+            "name": "Library14",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.ISLibraryO = 15\npixc.callRefs(self.ISLibraryO)",
+            "kind": "func",
+            "name": "Library15",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.ISLibraryP = 16\npixc.callRefs(self.ISLibraryP)",
+            "kind": "func",
+            "name": "Library16",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.ISLibraryQ = 17\npixc.callRefs(self.ISLibraryQ)",
+            "kind": "func",
+            "name": "Library17",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.ISLibraryR = 18\npixc.callRefs(self.ISLibraryR)",
+            "kind": "func",
+            "name": "Library18",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.ISLibraryS = 19\npixc.callRefs(self.ISLibraryS)",
+            "kind": "func",
+            "name": "Library19",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.ISLibraryT = 20\npixc.callRefs(self.ISLibraryT)",
+            "kind": "func",
+            "name": "Library20",
+            "slotStyle": "leftIn;rightOut"
+           }
+          ],
+          "kind": "ns",
+          "name": "Library11to20"
+         },
+         {
+          "elems": [
+           {
+            "body": "self.ISLibraryU = 21\npixc.callRefs(self.ISLibraryU)",
+            "kind": "func",
+            "name": "Library21",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.ISLibraryV = 22\npixc.callRefs(self.ISLibraryV)",
+            "kind": "func",
+            "name": "Library22",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.ISLibraryW = 23\npixc.callRefs(self.ISLibraryW)",
+            "kind": "func",
+            "name": "Library23",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.ISLibraryX = 24\npixc.callRefs(self.ISLibraryX)",
+            "kind": "func",
+            "name": "Library24",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.ISLibraryY = 25\npixc.callRefs(self.ISLibraryY)",
+            "kind": "func",
+            "name": "Library25",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.ISLibraryZ = 26\npixc.callRefs(self.ISLibraryZ)",
+            "kind": "func",
+            "name": "Library26",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.ISLibraryAA = 27\npixc.callRefs(self.ISLibraryAA)",
+            "kind": "func",
+            "name": "Library27",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.ISLibraryAB = 28\npixc.callRefs(self.ISLibraryAB)",
+            "kind": "func",
+            "name": "Library28",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.ISLibraryAC = 29\npixc.callRefs(self.ISLibraryAC)",
+            "kind": "func",
+            "name": "Library29",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.ISLibraryAD = 30\npixc.callRefs(self.ISLibraryAD)",
+            "kind": "func",
+            "name": "Library30",
+            "slotStyle": "leftIn;rightOut"
+           }
+          ],
+          "kind": "ns",
+          "name": "Library21to30"
+         },
+         {
+          "elems": [
+           {
+            "body": "self.ISLibraryAE = 31\npixc.callRefs(self.ISLibraryAE)",
+            "kind": "func",
+            "name": "Library31",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.ISLibraryAF = 32\npixc.callRefs(self.ISLibraryAF)",
+            "kind": "func",
+            "name": "Library32",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.ISLibraryAG = 33\npixc.callRefs(self.ISLibraryAG)",
+            "kind": "func",
+            "name": "Library33",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.ISLibraryAH = 34\npixc.callRefs(self.ISLibraryAH)",
+            "kind": "func",
+            "name": "Library34",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.ISLibraryAI = 35\npixc.callRefs(self.ISLibraryAI)",
+            "kind": "func",
+            "name": "Library35",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.ISLibraryAJ = 36\npixc.callRefs(self.ISLibraryAJ)",
+            "kind": "func",
+            "name": "Library36",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.ISLibraryAK = 37\npixc.callRefs(self.ISLibraryAK)",
+            "kind": "func",
+            "name": "Library37",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.ISLibraryAL = 38\npixc.callRefs(self.ISLibraryAL)",
+            "kind": "func",
+            "name": "Library38",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.ISLibraryAM = 39\npixc.callRefs(self.ISLibraryAM)",
+            "kind": "func",
+            "name": "Library39",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.ISLibraryAN = 40\npixc.callRefs(self.ISLibraryAN)",
+            "kind": "func",
+            "name": "Library40",
+            "slotStyle": "leftIn;rightOut"
+           }
+          ],
+          "kind": "ns",
+          "name": "Library31to40"
+         },
+         {
+          "elems": [
+           {
+            "body": "self.ISLibraryAO = 41\npixc.callRefs(self.ISLibraryAO)",
+            "kind": "func",
+            "name": "Library41",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.ISLibraryAP = 42\npixc.callRefs(self.ISLibraryAP)",
+            "kind": "func",
+            "name": "Library42",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.ISLibraryAQ = 43\npixc.callRefs(self.ISLibraryAQ)",
+            "kind": "func",
+            "name": "Library43",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.ISLibraryAR = 44\npixc.callRefs(self.ISLibraryAR)",
+            "kind": "func",
+            "name": "Library44",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.ISLibraryAS = 45\npixc.callRefs(self.ISLibraryAS)",
+            "kind": "func",
+            "name": "Library45",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.ISLibraryAT = 46\npixc.callRefs(self.ISLibraryAT)",
+            "kind": "func",
+            "name": "Library46",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.ISLibraryAU = 47\npixc.callRefs(self.ISLibraryAU)",
+            "kind": "func",
+            "name": "Library47",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.ISLibraryAV = 48\npixc.callRefs(self.ISLibraryAV)",
+            "kind": "func",
+            "name": "Library48",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.ISLibraryAW = 49\npixc.callRefs(self.ISLibraryAW)",
+            "kind": "func",
+            "name": "Library49",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.ISLibraryAX = 50\npixc.callRefs(self.ISLibraryAX)",
+            "kind": "func",
+            "name": "Library50",
+            "slotStyle": "leftIn;rightOut"
+           }
+          ],
+          "kind": "ns",
+          "name": "Library41to50"
+         }
+        ],
+        "kind": "ns",
+        "name": "LibraryID"
+       }
+      ],
+      "kind": "ns",
+      "name": "toChangeImageSlot"
+     },
+     {
+      "elems": [
+       {
+        "elems": [
+         {
+          "body": "self.AudioSAa = \"Screen1\"\npixc.callRefs(self.AudioSAa)",
+          "kind": "func",
+          "name": "Screen1",
+          "slotStyle": "leftIn;rightOut"
+         },
+         {
+          "body": "self.AudioSAa = \"Screen2\"\npixc.callRefs(self.AudioSAa)",
+          "kind": "func",
+          "name": "Screen2",
+          "slotStyle": "leftIn;rightOut"
+         },
+         {
+          "body": "self.AudioSAa = \"Auxiliary1\"\npixc.callRefs(self.AudioSAa)",
+          "kind": "func",
+          "name": "Auxiliary1",
+          "slotStyle": "leftIn;rightOut"
+         }
+        ],
+        "kind": "ns",
+        "name": "ScreenAuxID"
+       },
+       {
+        "elems": [
+         {
+          "elems": [
+           {
+            "body": "self.AudioISLiveA = \"IN1\"\npixc.callRefs(self.AudioISLiveA)",
+            "kind": "func",
+            "name": "Input1",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.AudioISLiveB = \"IN2\"\npixc.callRefs(self.AudioISLiveB)",
+            "kind": "func",
+            "name": "Input2",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.AudioISLiveC = \"IN3\"\npixc.callRefs(self.AudioISLiveC)",
+            "kind": "func",
+            "name": "Input3",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.AudioISLiveD = \"IN4\"\npixc.callRefs(self.AudioISLiveD)",
+            "kind": "func",
+            "name": "Input4",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.AudioISLiveE = \"IN5\"\npixc.callRefs(self.AudioISLiveE)",
+            "kind": "func",
+            "name": "Input5",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.AudioISLiveF = \"IN6\"\npixc.callRefs(self.AudioISLiveF)",
+            "kind": "func",
+            "name": "Input6",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.AudioISLiveG = \"IN7\"\npixc.callRefs(self.AudioISLiveG)",
+            "kind": "func",
+            "name": "Input7",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.AudioISLiveH = \"IN8\"\npixc.callRefs(self.AudioISLiveH)",
+            "kind": "func",
+            "name": "Input8",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.AudioISLiveI = \"IN9\"\npixc.callRefs(self.AudioISLiveI)",
+            "kind": "func",
+            "name": "Input9",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.AudioISLiveJ = \"IN10\"\npixc.callRefs(self.AudioISLiveJ)",
+            "kind": "func",
+            "name": "Input10",
+            "slotStyle": "leftIn;rightOut"
+           }
+          ],
+          "kind": "ns",
+          "name": "DirectRoutingLiveinput"
+         },
+         {
+          "elems": [
+           {
+            "body": "self.AudioISDanteA = \"IN_DANTE_CH1_8\"\npixc.callRefs(self.AudioISDanteA)",
+            "kind": "func",
+            "name": "DanteIN1to8",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.AudioISDanteB = \"IN_DANTE_CH9_16\"\npixc.callRefs(self.AudioISDanteB)",
+            "kind": "func",
+            "name": "DanteIN9to16",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.AudioISDanteC = \"IN_DANTE_CH17_24\"\npixc.callRefs(self.AudioISDanteC)",
+            "kind": "func",
+            "name": "DanteIN17to24",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.AudioISDanteD = \"IN_DANTE_CH25_32\"\npixc.callRefs(self.AudioISDanteD)",
+            "kind": "func",
+            "name": "DanteIN25to32",
+            "slotStyle": "leftIn;rightOut"
+           }
+          ],
+          "kind": "ns",
+          "name": "DirectRoutingDanteBlock"
+         },
+         {
+          "elems": [
+           {
+            "body": "self.AudioISAnalogA = \"IN_ANALOG_1\"\npixc.callRefs(self.AudioISAnalogA)",
+            "kind": "func",
+            "name": "AnalogIn1",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.AudioISAnalogB = \"IN_ANALOG_2\"\npixc.callRefs(self.AudioISAnalogB)",
+            "kind": "func",
+            "name": "AnalogIn2",
+            "slotStyle": "leftIn;rightOut"
+           }
+          ],
+          "kind": "ns",
+          "name": "DirectRoutingAnalog"
+         },
+         {
+          "elems": [
+           {
+            "body": "self.AudioISCustomA = \"CUSTOM_1\"\npixc.callRefs(self.AudioISCustomA)",
+            "kind": "func",
+            "name": "Custom1",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.AudioISCustomB = \"CUSTOM_2\"\npixc.callRefs(self.AudioISCustomB)",
+            "kind": "func",
+            "name": "Custom2",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.AudioISCustomC = \"CUSTOM_3\"\npixc.callRefs(self.AudioISCustomC)",
+            "kind": "func",
+            "name": "Custom3",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.AudioISCustomD = \"CUSTOM_4\"\npixc.callRefs(self.AudioISCustomD)",
+            "kind": "func",
+            "name": "Custom4",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.AudioISCustomE = \"CUSTOM_5\"\npixc.callRefs(self.AudioISCustomE)",
+            "kind": "func",
+            "name": "Custom5",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.AudioISCustomF = \"CUSTOM_6\"\npixc.callRefs(self.AudioISCustomF)",
+            "kind": "func",
+            "name": "Custom6",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.AudioISCustomG = \"CUSTOM_7\"\npixc.callRefs(self.AudioISCustomG)",
+            "kind": "func",
+            "name": "Custom7",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.AudioISCustomH = \"CUSTOM_8\"\npixc.callRefs(self.AudioISCustomH)",
+            "kind": "func",
+            "name": "Custom8",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.AudioISCustomI = \"CUSTOM_9\"\npixc.callRefs(self.AudioISCustomI)",
+            "kind": "func",
+            "name": "Custom9",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.AudioISCustomJ = \"CUSTOM_10\"\npixc.callRefs(self.AudioISCustomJ)",
+            "kind": "func",
+            "name": "Custom10",
+            "slotStyle": "leftIn;rightOut"
+           }
+          ],
+          "kind": "ns",
+          "name": "DirectRoutingCustom"
+         },
+         {
+          "body": "self.AudioISNoneA = \"NONE\"\npixc.callRefs(self.AudioISNoneA)",
+          "kind": "func",
+          "name": "None",
+          "slotStyle": "leftIn;rightOut"
+         },
+         {
+          "elems": [
+           {
+            "body": "self.AudioISLayerA = \"Layer1\"\npixc.callRefs(self.AudioISLayerA)",
+            "kind": "func",
+            "name": "LiveLayer1",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.AudioISLayerB = \"Layer2\"\npixc.callRefs(self.AudioISLayerB)",
+            "kind": "func",
+            "name": "LiveLayer2",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.AudioISLayerC = \"Layer3\"\npixc.callRefs(self.AudioISLayerC)",
+            "kind": "func",
+            "name": "LiveLayer3",
+            "slotStyle": "leftIn;rightOut"
+           },
+           {
+            "body": "self.AudioISLayerD = \"Layer4\"\npixc.callRefs(self.AudioISLayerD)",
+            "kind": "func",
+            "name": "LiveLayer4",
+            "slotStyle": "leftIn;rightOut"
+           }
+          ],
+          "kind": "ns",
+          "name": "FollowLiveLayerContent"
+         }
+        ],
+        "kind": "ns",
+        "name": "InputSource"
+       }
+      ],
+      "kind": "ns",
+      "name": "toAudio"
+     },
+     {
+      "elems": [
+       {
+        "attKind": "standard",
+        "body": "\nif val == \"Program\" then\n\tself.MPTname = 0\n\telseif val == \"Preview\" then\n\tself.MPTname = 1\nend\n\nself.MPTL = pixcCommon.execAttribute(0, self.MPTL, self.MPTname, doSet, true )",
+        "kind": "func",
+        "name": "TargetLabel",
+        "params": [
+         {
+          "name": "val",
+          "type": "string"
+         }
+        ],
+        "slotStyle": "leftIn;rightNone;triggerHidden"
+       }
+      ],
+      "kind": "ns",
+      "name": "fromRecallingMasterPreset"
+     },
+     {
+      "elems": [
+       {
+        "attKind": "standard",
+        "body": "\nif val == \"Program\" then\n\tself.SPTname = 0\n\telseif val == \"Preview\" then\n\tself.SPTname = 1\nend\n\nself.SPTL = pixcCommon.execAttribute(0, self.SPTL, self.SPTname, doSet, true )",
+        "kind": "func",
+        "name": "TargetLabel",
+        "params": [
+         {
+          "name": "val",
+          "type": "string"
+         }
+        ],
+        "slotStyle": "leftIn;rightNone;triggerHidden"
+       }
+      ],
+      "kind": "ns",
+      "name": "fromRecallingScreenPreset"
+     },
+     {
+      "elems": [
+       {
+        "attKind": "standard",
+        "body": "\nif val == \"Program\" then\n\tself.LSTname = 0\n\telseif val == \"Preview\" then\n\tself.LSTname = 1\nend\n\nself.LSTL = pixcCommon.execAttribute(0, self.LSTL, self.LSTname, doSet, true )",
+        "kind": "func",
+        "name": "TargetLabel",
+        "params": [
+         {
+          "name": "val",
+          "type": "string"
+         }
+        ],
+        "slotStyle": "leftIn;rightNone;triggerHidden"
+       }
+      ],
+      "kind": "ns",
+      "name": "fromChangeLayerSource"
+     }
+    ],
+    "cjv": {
+     "h": 443.0,
+     "w": 232.0,
+     "x": 235.0,
+     "y": 114.0
+    },
+    "definedExternally": false,
+    "hostInfo": {
+     "systemType": ""
+    },
+    "libraryExportPath": "C:/ProgramData/AV Stumpfl/Pixera/control_library_user/Midra4KAWJProtocolHelper.json",
+    "license": "1GNTlyr7sewU1l3S6nhV4vibKunDFzwdFYEX3H4eGnybWJJuSYqq77TLE8qMrsI0+K7JKNmRshj9//6bFZ8X6DnBFU7t4DmyE4n/Z0/fBn5Aj8YVO3qUzclCUN56zW7zqwsI1w/Mksx0IoVVKzC8wA==",
+    "name": "AnalogWayMidra4KAWJProtocolHelper",
+    "properties": [
+     {
+      "cont": "Yosuke Kikukawa",
+      "name": "Creator Name",
+      "readOnly": true
+     },
+     {
+      "cont": "1.2.1",
+      "name": "Version",
+      "readOnly": true
+     },
+     {
+      "cont": "14 Nov. 2021",
+      "name": "Data",
+      "readOnly": true
+     }
+    ],
+    "separateCode": false,
+    "uiUrl": ""
+   }
