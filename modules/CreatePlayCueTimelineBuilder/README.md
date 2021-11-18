@@ -21,6 +21,18 @@ Add 01 to 99 or A to Z in front the resource name to determine the order in whic
 2. Added "Fade Duration" action to the module.  
 Set the time of the resource's fade duration by entering the number of seconds in "Fade Duration".
 
-##  Dependencies
+## Dependencies
 
-Tested Pixera version 1.8.3
+- Tested with Pixera 1.8.3
+
+## Author
+
+**Name:** [Yosuke Kikukawa](https://github.com/YosukeMW)
+
+This is a modified version of the TimelineBuilder module made by AV Stumpfl.
+
+## License
+
+[MIT License](https://github.com/pixera-one/control-modules/blob/main/LICENSE)
+
+This is a third-party community module, therefor AV Stumpfl will not provide any direct support for this module.
