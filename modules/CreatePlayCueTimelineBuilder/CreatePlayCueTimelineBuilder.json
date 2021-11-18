@@ -1,131 +1,145 @@
 {
- "api": [
-  {
-   "body": "require \"pixcHelper\"\nself.pixcHelper = createPixcHelper(pixc, self())\nlocal tl = self.Internal.getFirstReffedTimeline()\nif tl == nil then\n\ttl = pixc.getRoot().Pixera.Timelines.getTimelineAtIndex(0)\n\tif tl == nil then\n\t\treturn\n\tend\nend\n\nlocal layer = Pixera.Timelines.Layer.getInst(tl.getName() .. \".\" .. self.pixcHelper:getProperty(\"Layer Name\", \"Layer 1\"))\nif layer == nil or layer.getHandleInt() == 0 then\n\treturn\nend\nself.Internal.fillLayer(tl, layer, self.Internal.getResources())\n",
-   "kind": "func",
-   "name": "buildTimeline"
-  },
-  {
-   "body": "if action == nil then\n\treturn pixc.callRefs()\nend\nreturn pixc.callRefs(action)\n",
-   "kind": "func",
-   "name": "toTimeline",
-   "params": [
-    {
-     "name": "action",
-     "type": "string"
-    }
-   ]
-  },
-  {
-   "body": "if action == nil then\r\n\treturn pixc.callRefs()\r\nend\r\nreturn pixc.callRefs(action)\r\n",
-   "kind": "func",
-   "name": "toFolderResource",
-   "params": [
-    {
-     "name": "action",
-     "type": "string"
-    }
-   ]
-  },
-  {
-   "body": "--\r\n",
-   "kind": "func",
-   "name": "timelineBuilt"
-  },
-  {
-   "attKind": "standard",
-   "body": "--attKind:standard\nself.fadeTime = pixcCommon.execAttribute(0, self.fadeTime, Value, doSet, true )\n",
-   "kind": "func",
-   "name": "FadeDuration",
-   "params": [
-    {
-     "name": "Value",
-     "type": "int"
-    }
-   ]
-  },
-  {
-   "elems": [
-    {
-     "body": "local res = self.toTimeline()\nfor _, v in ipairs(res) do\n\tfor __, k in ipairs(v) do\n\t\tif k ~= nil then\n\t\t\treturn k\n\t\tend\n\tend\nend\n",
-     "kind": "func",
-     "name": "getFirstReffedTimeline"
-    },
-    {
-     "body": "if true then\n\tlocal crRes = self.toFolderResource(\"getResources\")\n\tfor _, v in ipairs(crRes) do\n\t\tfor __, k in ipairs(v) do\n\t\t\tif k ~= nil then\n\t\t\t\treturn k\n\t\t\tend\n\t\tend\n\tend\nend\nif true then return end\nlocal folder = pixc.getRoot().Pixera.Resources.getResourceFolderWithNamePath(\"Media/Standard Content\")\nif folder == nil then\n\treturn {}\nend\nlocal resources = folder.getResources()\nif resources == nil then\n\treturn {}\nend\nreturn resources\n",
-     "kind": "func",
-     "name": "getResources"
-    },
-    {
-     "body": "if timeline == nil or layer == nil or resources == nil then\n\tpixc.log(\"nil parameters\")\n\treturn\nend\npixc.log(\"timeline \" .. timeline.getName())\npixc.log(\"will fill layer: \" .. layer.getName())\nlocal fps = timeline.getFps()\ntimeline.removeCues()\nlayer.removeClips()\nlocal time = 0\nlocal endTime = 0\nfor _, res in ipairs(resources) do\n\tlocal duration = res.getDuration()\n\tif duration > 0 then\n\t\tif duration < 2 then\n\t\t\tduration = 10\n\t\tend\n\t\tlocal clip = layer.createClip()\n\t\tlocal playCue = self.pixcHelper:getProperty(\"CreatePlayCue\")\n\t\tif clip ~= nil and playCue == \"true\" then\n\t\t\tclip.setDuration(duration * fps)\n\t\t\tclip.setTime(time * fps)\n\t\t\tclip.assignResource(res.getId())\n\t\t\ttimeline.createCue(\" \"..string.sub(res.getName(), 0, -5), time * fps, 1)\n\t\t\tendTime = time + duration\n\t\t\ttime = endTime\n\t\t\telseif clip ~= nil and playCue == \"false\" then\n\t\t\tclip.setDuration(duration * fps)\n\t\t\tclip.setTime(time * fps)\n\t\t\tclip.assignResource(res.getId())\n\t\t\tendTime = time + duration\n\t\t\ttime = endTime\n\t\tend\n\t\tif self.fadeTime == nil then\n\t\t\tlocal fadeTime = 0\n\t\t\telse\n\t\t\tfadetime = self.fadeTime\n\t\t\tif duration > 2 then\n\t\t\t\ttime = time - self.fadeTime\n\t\t\tend\n\t\tend\n\tend\nend\nif endTime > 1 then\n\tlocal cue = timeline.createCue(\"ToBeginning\", endTime * fps - 1, 4)\n\tif cue ~= nil then\n\t\tcue.setJumpGoalTime(0)\n\tend\nend\nself.timelineBuilt()\n",
-     "kind": "func",
-     "name": "fillLayer",
-     "params": [
-      {
-       "name": "timeline",
-       "type": "handle"
+    "api": [
+     {
+      "body": "require \"pixcHelper\"\nself.pixcHelper = createPixcHelper(pixc, self())\nlocal tl = self.Internal.getFirstReffedTimeline()\nif tl == nil then\n\ttl = pixc.getRoot().Pixera.Timelines.getTimelineAtIndex(0)\n\tif tl == nil then\n\t\treturn\n\tend\nend\n\nlocal layer = Pixera.Timelines.Layer.getInst(tl.getName() .. \".\" .. self.pixcHelper:getProperty(\"Layer Name\", \"Layer 1\"))\nif layer == nil or layer.getHandleInt() == 0 then\n\treturn\nend\nself.Internal.fillLayer(tl, layer, self.Internal.getResources())\n",
+      "kind": "func",
+      "name": "buildTimeline"
+     },
+     {
+      "body": "if action == nil then\n\treturn pixc.callRefs()\nend\nreturn pixc.callRefs(action)\n",
+      "kind": "func",
+      "name": "toTimeline",
+      "params": [
+       {
+        "name": "action",
+        "type": "string"
+       }
+      ]
+     },
+     {
+      "body": "if action == nil then\r\n\treturn pixc.callRefs()\r\nend\r\nreturn pixc.callRefs(action)\r\n",
+      "kind": "func",
+      "name": "toFolderResource",
+      "params": [
+       {
+        "name": "action",
+        "type": "string"
+       }
+      ]
+     },
+     {
+      "body": "--\r\n",
+      "kind": "func",
+      "name": "timelineBuilt"
+     },
+     {
+      "attKind": "standard",
+      "attReports": {
+       "0": "0.00"
       },
-      {
-       "name": "layer",
-       "type": "handle"
-      },
-      {
-       "name": "resources",
-       "type": "handle[]"
-      }
-     ]
-    }
-   ],
-   "kind": "ns",
-   "name": "Internal"
-  }
- ],
- "cjv": {
-  "h": 248.0,
-  "w": 246.0,
-  "x": 594.0,
-  "y": 16.0
- },
- "definedExternally": false,
- "hostInfo": {
-  "systemType": ""
- },
- "libraryExportPath": "C:/ProgramData/AV Stumpfl/Pixera/control_library_user/CreatePlayCueTimelineBuilder.json",
- "license": "1GNTlyr7sewU1l3S6nhV4l9sW7JFFTtdriZOGHauf/RnCnL7L2J48LCwvE95obXuEiXLx4uZ6TpLIyJAzb0BhYMtuv7jJUkUEJqmQPKgNnU=",
- "name": "CreatePlayCueTimelineBuilder",
- "properties": [
-  {
-   "cont": "Layer 1",
-   "name": "Layer Name"
-  },
-  {
-   "cont": "false",
-   "name": "CreatePlayCue",
-   "typeHint": "bool"
-  },
-  {
-   "cont": "AV Stumpfl",
-   "name": "Creator Name",
-   "readOnly": true,
-   "typeHint": "string"
-  },
-  {
-   "cont": "www.avstumpfl.com",
-   "name": "Creator URL",
-   "readOnly": true,
-   "typeHint": "string"
-  },
-  {
-   "cont": "Yosuke Kikukawa",
-   "name": "Modified by",
-   "readOnly": true,
-   "typeHint": "string"
-  },
-  {
-   "cont": "",
-   "name": "uib"
-  }
- ],
- "separateCode": false,
- "uiUrl": "/static/ui_builder/ui_builder.html"
-}
+      "body": "self.fadeTime = pixcCommon.execAttribute(0, self.fadeTime, Value, doSet, true )\n",
+      "kind": "func",
+      "name": "FadeDuration",
+      "params": [
+       {
+        "name": "Value",
+        "type": "int"
+       }
+      ]
+     },
+     {
+      "elems": [
+       {
+        "body": "local res = self.toTimeline()\nfor _, v in ipairs(res) do\n\tfor __, k in ipairs(v) do\n\t\tif k ~= nil then\n\t\t\treturn k\n\t\tend\n\tend\nend\n",
+        "kind": "func",
+        "name": "getFirstReffedTimeline"
+       },
+       {
+        "body": "if true then\n\tlocal crRes = self.toFolderResource(\"getResources\")\n\tfor _, v in ipairs(crRes) do\n\t\tfor __, k in ipairs(v) do\n\t\t\tif k ~= nil then\n\t\t\t\treturn k\n\t\t\tend\n\t\tend\n\tend\nend\nif true then return end\nlocal folder = pixc.getRoot().Pixera.Resources.getResourceFolderWithNamePath(\"Media/Standard Content\")\nif folder == nil then\n\treturn {}\nend\nlocal resources = folder.getResources()\nif resources == nil then\n\treturn {}\nend\nreturn resources\n",
+        "kind": "func",
+        "name": "getResources"
+       },
+       {
+        "body": "if timeline == nil or layer == nil or resources == nil then\n\tpixc.log(\"nil parameters\")\n\treturn\nend\npixc.log(\"timeline \" .. timeline.getName())\npixc.log(\"will fill layer: \" .. layer.getName())\nlocal fps = timeline.getFps()\ntimeline.removeCues()\nlayer.removeClips()\nlocal time = 0\nlocal endTime = 0\nfor _, res in ipairs(resources) do\n\tlocal duration = res.getDuration()\n\tif duration > 0 then\n\t\tif duration < 2 then\n\t\t\tduration = 10\n\t\tend\n\t\tlocal clip = layer.createClip()\n\t\tlocal playCue = self.pixcHelper:getProperty(\"CreatePlayCue\")\n\t\tif clip ~= nil and playCue == \"true\" then\n\t\t\tclip.setDuration(duration * fps)\n\t\t\tclip.setTime(time * fps)\n\t\t\tclip.assignResource(res.getId())\n\t\t\ttimeline.createCue(\" \"..string.sub(res.getName(), 0, -5), time * fps, 1)\n\t\t\tendTime = time + duration\n\t\t\ttime = endTime\n\t\t\telseif clip ~= nil and playCue == \"false\" then\n\t\t\tclip.setDuration(duration * fps)\n\t\t\tclip.setTime(time * fps)\n\t\t\tclip.assignResource(res.getId())\n\t\t\tendTime = time + duration\n\t\t\ttime = endTime\n\t\tend\n\t\tif self.fadeTime == nil then\n\t\t\tlocal fadeTime = 0\n\t\t\telse\n\t\t\tfadetime = self.fadeTime\n\t\t\tif duration > 2 then\n\t\t\t\ttime = time - self.fadeTime\n\t\t\tend\n\t\tend\n\tend\nend\nif endTime > 1 then\n\tlocal cue = timeline.createCue(\"ToBeginning\", endTime * fps - 1, 4)\n\tif cue ~= nil then\n\t\tcue.setJumpGoalTime(0)\n\tend\nend\nself.timelineBuilt()\n",
+        "kind": "func",
+        "name": "fillLayer",
+        "params": [
+         {
+          "name": "timeline",
+          "type": "handle"
+         },
+         {
+          "name": "layer",
+          "type": "handle"
+         },
+         {
+          "name": "resources",
+          "type": "handle[]"
+         }
+        ]
+       }
+      ],
+      "kind": "ns",
+      "name": "Internal"
+     }
+    ],
+    "cjv": {
+     "h": 200.0,
+     "w": 200.0,
+     "x": 804.0,
+     "y": 123.0
+    },
+    "definedExternally": false,
+    "hostInfo": {
+     "systemType": ""
+    },
+    "libraryExportPath": "C:/ProgramData/AV Stumpfl/Pixera/control_library_user/CreatePlayCueTimelineBuilder.json",
+    "license": "1GNTlyr7sewU1l3S6nhV4m6gJxx9aEkIDCIxyEGNklVlS385btL7Epu3Rml3+kBg+cbyvcy96SKr1vMv2OVXTBYcit8JmcTmno2aKJBn/V0OpZ0R66XsFFgSvnhPjfhjySbVSykNZWmtsjcucYRjIA==",
+    "name": "CreatePlayCueTimelineBuilder",
+    "properties": [
+     {
+      "cont": "Layer 1",
+      "name": "Layer Name"
+     },
+     {
+      "cont": "false",
+      "name": "CreatePlayCue",
+      "typeHint": "bool"
+     },
+     {
+      "cont": "AV Stumpfl",
+      "name": "Creator Name",
+      "readOnly": true,
+      "typeHint": "string"
+     },
+     {
+      "cont": "www.avstumpfl.com",
+      "name": "Creator URL",
+      "readOnly": true,
+      "typeHint": "string"
+     },
+     {
+      "cont": "Yosuke Kikukawa",
+      "name": "Modified by",
+      "readOnly": true,
+      "typeHint": "string"
+     },
+     {
+      "cont": "1.0.0",
+      "name": "Version",
+      "readOnly": true,
+      "typeHint": "number"
+     },
+     {
+      "cont": "27 Aug. 2021",
+      "name": "Date",
+      "readOnly": true
+     },
+     {
+      "cont": "",
+      "name": "uib"
+     }
+    ],
+    "separateCode": false,
+    "uiUrl": "/static/ui_builder/ui_builder.html"
+   }
