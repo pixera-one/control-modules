@@ -1,4 +1,4 @@
-# Companion
+# BirddogVisca
 
 ### Version: 1.1.0
 
