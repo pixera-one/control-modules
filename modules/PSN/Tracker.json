@@ -1,0 +1,192 @@
+{
+ "api": [
+  {
+   "body": "-- slotStyle:leftIn;rightNone;triggerHidden\r\n\r\nif self.pixcHelper == nil then\r\n\trequire \"pixcHelper\"\r\n\tself.pixcHelper = createPixcHelper(pixc,self())\r\nend\r\n\r\nself._id = self.pixcHelper:getProperty(\"Tracker ID/Name\")\r\nself._index = self.pixcHelper:getProperty(\"Use Index Insted of ID\")\r\n\r\nif data == nil then\r\n\treturn\r\nend\r\n\r\nif self._index == \"true\" then\r\nlocal id = tonumber(self._id)\r\n\tif data[id] ~= nil then\r\n\r\n\t\tself.x(data[id].x)\r\n\t\tself.y(data[id].y)\r\n\t\tself.z(data[id].z)\r\n\t\tself.yaw(data[id].yaw)\r\n\t\tself.pitch(data[id].pitch)\r\n\t\tself.roll(data[id].roll)\r\n\t\tself.id(data[id].id)\r\n\t\tif data[id].membersCount ~= nil and data[id].membersCount > 0 then\r\n\t\t\tself.Members(data[id].member)\r\n\t\tend\r\n\tend\r\nelse\r\n\tfor _ in pairs(data) do\r\n\t\tid = data[_].id\r\n\t\tif id ~= nil and id == self._id then\r\n\t\t\tself.x(data[_].x)\r\n\t\t\tself.y(data[_].y)\r\n\t\t\tself.z(data[_].z)\r\n\t\t\tself.yaw(data[_].yaw)\r\n\t\t\tself.pitch(data[_].pitch)\r\n\t\t\tself.roll(data[_].roll)\r\n\t\t\tself.id(id)\r\n\t\t\tif data[_].membersCount ~= nil and data[_].membersCount > 0 then\r\n\t\t\t\tself.Members(data[_].member)\r\n\t\t\tend\r\n\t\tend\r\n\tend\r\nend",
+   "kind": "func",
+   "name": "Tracker",
+   "params": [
+    {
+     "name": "data",
+     "type": "table"
+    }
+   ],
+   "slotStyle": "leftIn;rightNone;triggerHidden"
+  },
+  {
+   "attKind": "internal",
+   "body": "-- attKind: internal\n-- slotStyle:leftNone;rightOut;triggerHidden\nself._X = pixcCommon.execAttribute(0, self._X, value, true)\nreturn self._X\n",
+   "kind": "func",
+   "name": "x",
+   "params": [
+    {
+     "name": "value",
+     "type": "double"
+    }
+   ],
+   "slotStyle": "leftNone;rightOut;triggerHidden"
+  },
+  {
+   "attKind": "internal",
+   "body": "-- attKind: internal\n-- slotStyle:leftNone;rightOut;triggerHidden\nself._Y = pixcCommon.execAttribute(0, self._Y, value, true)\nreturn self._Y\n",
+   "kind": "func",
+   "name": "y",
+   "params": [
+    {
+     "name": "value",
+     "type": "double"
+    }
+   ],
+   "slotStyle": "leftNone;rightOut;triggerHidden"
+  },
+  {
+   "attKind": "internal",
+   "body": "-- attKind: internal\n-- slotStyle:leftNone;rightOut;triggerHidden\nself._Z = pixcCommon.execAttribute(0, self._Z, value, true)\nreturn self._Z\n",
+   "kind": "func",
+   "name": "z",
+   "params": [
+    {
+     "name": "value",
+     "type": "double"
+    }
+   ],
+   "slotStyle": "leftNone;rightOut;triggerHidden"
+  },
+  {
+   "attKind": "internal",
+   "body": "-- attKind: internal\n-- slotStyle:leftNone;rightOut;triggerHidden\nself._yaw = pixcCommon.execAttribute(0, self._yaw, value, true)\nreturn self._yaw\n",
+   "kind": "func",
+   "name": "yaw",
+   "params": [
+    {
+     "name": "value",
+     "type": "double"
+    }
+   ],
+   "slotStyle": "leftNone;rightOut;triggerHidden"
+  },
+  {
+   "attKind": "internal",
+   "body": "-- attKind: internal\n-- slotStyle:leftNone;rightOut;triggerHidden\nself._pitch = pixcCommon.execAttribute(0, self._pitch, value, true)\nreturn self._pitch\n",
+   "kind": "func",
+   "name": "pitch",
+   "params": [
+    {
+     "name": "value",
+     "type": "double"
+    }
+   ],
+   "slotStyle": "leftNone;rightOut;triggerHidden"
+  },
+  {
+   "attKind": "internal",
+   "body": "-- attKind: internal\n-- slotStyle:leftNone;rightOut;triggerHidden\nself._roll = pixcCommon.execAttribute(0, self._roll, value, true)\nreturn self._roll\n",
+   "kind": "func",
+   "name": "roll",
+   "params": [
+    {
+     "name": "value",
+     "type": "double"
+    }
+   ],
+   "slotStyle": "leftNone;rightOut;triggerHidden"
+  },
+  {
+   "attKind": "internal",
+   "body": "-- attKind: internal\n-- slotStyle:leftNone;rightOut;triggerHidden\nself._id = pixcCommon.execAttribute(0, self._id, value, true)\nreturn self._id\n",
+   "kind": "func",
+   "name": "id",
+   "params": [
+    {
+     "name": "value",
+     "type": "int"
+    }
+   ],
+   "slotStyle": "leftNone;rightOut;triggerHidden"
+  },
+  {
+   "body": "-- slotStyle:leftNone;rightOut;triggerHidden\n\nif members ~= nil then\n\tpixc.callRefs(members)\nelse\n\tpixc.callRefs(nil)\nend",
+   "kind": "func",
+   "name": "Members",
+   "params": [
+    {
+     "name": "members",
+     "type": "table"
+    }
+   ],
+   "slotStyle": "leftNone;rightOut;triggerHidden"
+  },
+  {
+   "body": "-- slotStyle:leftNone;rightOut;\nif self._X ~= nil and self._Y ~= nil and self._Z ~= nil then\n\tlocal tab = {self._X, self._Y, self._Z}\n\tpixc.callRefs(tab)\nelse\n\tpixc.callRefs(nil)\nend",
+   "kind": "func",
+   "name": "Marker_Calibration",
+   "slotStyle": "leftNone;rightOut;"
+  }
+ ],
+ "cjv": {
+  "h": 227.0,
+  "w": 212.0,
+  "x": 290.5555555555556,
+  "y": 43.22222222222217
+ },
+ "definedExternally": false,
+ "hostInfo": {
+  "systemType": ""
+ },
+ "libraryExportPath": "C:/ProgramData/AV Stumpfl/Pixera/control_library_user/Optitrack/Tracker.json",
+ "license": "1GNTlyr7sewU1l3S6nhV4jcCkKuydnoUTkSHOGC67GRlk+3Haw97gjAdqNI5Q6lIMID9EZHBDAxTYMiM2st8fHp3K44DKcx1noQPVP0smzw=",
+ "name": "Tracker",
+ "properties": [
+  {
+   "cont": "1001",
+   "name": "Tracker ID/Name",
+   "typeHint": "string"
+  },
+  {
+   "cont": "false",
+   "name": "Use Index Insted of ID",
+   "readOnly": true,
+   "typeHint": "bool"
+  },
+  {
+   "cont": "",
+   "imageBase64": "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",
+   "name": "Logo",
+   "readOnly": true,
+   "showName": false,
+   "typeHint": "image"
+  },
+  {
+   "cont": "Benni M.",
+   "name": "Creator Name",
+   "readOnly": true,
+   "typeHint": "string"
+  },
+  {
+   "cont": "www.benni-m.de",
+   "name": "Creator URL",
+   "readOnly": true,
+   "typeHint": "url"
+  },
+  {
+   "cont": "www.benni-m.de/pixera/control#Optitrack-Tracker",
+   "name": "Documentation",
+   "readOnly": true,
+   "typeHint": "url"
+  },
+  {
+   "cont": "1.0",
+   "name": "Version",
+   "readOnly": true,
+   "typeHint": "string"
+  },
+  {
+   "cont": "02.04.2021",
+   "name": "Date",
+   "readOnly": true,
+   "showName": false,
+   "typeHint": "string"
+  }
+ ],
+ "separateCode": false,
+ "uiUrl": ""
+}
